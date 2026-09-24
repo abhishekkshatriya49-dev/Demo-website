@@ -1,0 +1,1741 @@
+<!-- =========================================================
+     HUSTLIFY — PREMIUM THANK YOU PAGE
+     Systeme.io Custom HTML Block
+     
+     Effect:
+     Matte Rise / Rising Diagonal inspired Canvas background
+     Dark premium glassmorphism UI
+     
+     Primary CTA:
+     ACCESS ALL MATERIALS
+     ========================================================= -->
+
+<style>
+/* =========================================================
+   RESET
+   ========================================================= */
+
+#hustlify-thankyou,
+#hustlify-thankyou * {
+  box-sizing: border-box;
+}
+
+#hustlify-thankyou {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  color: #f5f5f5;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255,255,255,.08),
+      transparent 35%
+    ),
+    #08090c;
+}
+
+
+/* =========================================================
+   CANVAS — MATTE RISE EFFECT
+   ========================================================= */
+
+#hustlify-matte-rise {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: -4;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BACKGROUND OVERLAY
+   ========================================================= */
+
+.hustlify-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      transparent 0%,
+      rgba(8,9,12,.18) 45%,
+      rgba(8,9,12,.82) 100%
+    );
+
+  backdrop-filter: blur(1px);
+}
+
+
+/* =========================================================
+   SUBTLE GRID
+   ========================================================= */
+
+.hustlify-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  opacity: .08;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.06) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 18%,
+      black 82%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   MAIN WRAPPER
+   ========================================================= */
+
+.hustlify-thankyou-inner {
+  position: relative;
+  z-index: 5;
+
+  width: min(940px, calc(100% - 32px));
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 70px 0 38px;
+}
+
+
+/* =========================================================
+   SUCCESS BADGE
+   ========================================================= */
+
+.hustlify-success-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,.14);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.035)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 12px 35px rgba(0,0,0,.22);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  color: rgba(255,255,255,.78);
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.hustlify-success-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,.75);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hustlify-hero {
+  text-align: center;
+
+  max-width: 760px;
+
+  margin-top: 26px;
+}
+
+.hustlify-hero h1 {
+  margin: 0;
+
+  font-size: clamp(40px, 7vw, 76px);
+
+  line-height: .98;
+
+  font-weight: 400;
+
+  letter-spacing: -.045em;
+
+  color: #ffffff;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 2px 25px rgba(255,255,255,.08);
+}
+
+.hustlify-hero h1 span {
+  display: block;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #cfd2d7 45%,
+      #ffffff 75%,
+      #8f949c 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.hustlify-hero p {
+  max-width: 620px;
+
+  margin: 22px auto 0;
+
+  color: rgba(255,255,255,.62);
+
+  font-size: clamp(15px, 2vw, 18px);
+
+  line-height: 1.7;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   PACKAGE CARD
+   ========================================================= */
+
+.hustlify-package {
+  width: min(700px, 100%);
+
+  margin-top: 40px;
+
+  padding: 28px;
+
+  border-radius: 24px;
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.085),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.hustlify-package-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.hustlify-package-title {
+  font-size: 17px;
+
+  font-weight: 600;
+
+  letter-spacing: -.01em;
+
+  color: #fff;
+}
+
+.hustlify-package-label {
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: .13em;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,.45);
+}
+
+
+/* =========================================================
+   INCLUDED ITEMS
+   ========================================================= */
+
+.hustlify-items {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 22px;
+}
+
+.hustlify-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 13px 14px;
+
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.035);
+
+  border: 1px solid rgba(255,255,255,.065);
+
+  color: rgba(255,255,255,.70);
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+.hustlify-check {
+  flex: 0 0 auto;
+
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  background: rgba(255,255,255,.08);
+
+  color: #fff;
+
+  font-size: 11px;
+}
+
+.hustlify-bonus-line {
+  margin-top: 18px;
+
+  text-align: center;
+
+  color: rgba(255,255,255,.46);
+
+  font-size: 11px;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   GLASS CTA AREA
+   ========================================================= */
+
+.hustlify-cta-area {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  margin-top: 34px;
+}
+
+
+/* =========================================================
+   LIQUID GLASS BUTTON
+   ========================================================= */
+
+.hustlify-glass-button {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 280px;
+
+  min-height: 62px;
+
+  padding: 0 32px;
+
+  overflow: hidden;
+
+  border-radius: 17px;
+
+  border: 1px solid rgba(255,255,255,.27);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.19),
+      rgba(255,255,255,.055)
+    );
+
+  color: #fff;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    0 12px 35px rgba(0,0,0,.28),
+    0 0 0 1px rgba(255,255,255,.025);
+
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    border-color .35s ease,
+    box-shadow .35s ease,
+    background .35s ease;
+}
+
+
+/* liquid highlight */
+
+.hustlify-glass-button::before {
+  content: "";
+
+  position: absolute;
+
+  top: -90%;
+  left: -35%;
+
+  width: 70%;
+  height: 280%;
+
+  transform: rotate(25deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.20),
+      transparent
+    );
+
+  filter: blur(8px);
+
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* inner glass reflection */
+
+.hustlify-glass-button::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 1px;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255,255,255,.07);
+
+  pointer-events: none;
+}
+
+
+/* button content */
+
+.hustlify-button-content {
+  position: relative;
+
+  z-index: 3;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 13px;
+}
+
+.hustlify-arrow {
+  font-size: 17px;
+
+  transition:
+    transform .35s ease;
+}
+
+
+/* hover */
+
+.hustlify-glass-button:hover {
+  transform:
+    translateY(-3px)
+    scale(1.015);
+
+  border-color:
+    rgba(255,255,255,.42);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.24),
+      rgba(255,255,255,.075)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    0 18px 50px rgba(0,0,0,.38),
+    0 0 35px rgba(255,255,255,.08);
+}
+
+.hustlify-glass-button:hover::before {
+  transform:
+    translateX(210%)
+    rotate(25deg);
+}
+
+.hustlify-glass-button:hover .hustlify-arrow {
+  transform: translateX(5px);
+}
+
+
+/* click */
+
+.hustlify-glass-button:active {
+  transform: scale(.985);
+}
+
+
+/* =========================================================
+   CTA NOTE
+   ========================================================= */
+
+.hustlify-cta-note {
+  margin-top: 13px;
+
+  color: rgba(255,255,255,.40);
+
+  font-size: 11px;
+
+  text-align: center;
+
+  letter-spacing: .01em;
+}
+
+
+/* =========================================================
+   SUPPORT
+   ========================================================= */
+
+.hustlify-support {
+  margin-top: 28px;
+
+  text-align: center;
+
+  color: rgba(255,255,255,.40);
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+.hustlify-support a {
+  color: rgba(255,255,255,.72);
+
+  text-decoration: none;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.22);
+
+  transition:
+    color .2s ease,
+    border-color .2s ease;
+}
+
+.hustlify-support a:hover {
+  color: #fff;
+
+  border-color: rgba(255,255,255,.65);
+}
+
+
+/* =========================================================
+   BOOKMARK NOTE
+   ========================================================= */
+
+.hustlify-bookmark {
+  margin-top: 13px;
+
+  color: rgba(255,255,255,.28);
+
+  font-size: 10px;
+
+  text-align: center;
+
+  letter-spacing: .03em;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.hustlify-footer {
+  width: 100%;
+
+  margin-top: 60px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid rgba(255,255,255,.07);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  color: rgba(255,255,255,.28);
+
+  font-size: 10px;
+}
+
+.hustlify-footer-links {
+  display: flex;
+
+  gap: 15px;
+}
+
+.hustlify-footer a {
+  color: rgba(255,255,255,.35);
+
+  text-decoration: none;
+
+  transition: color .2s ease;
+}
+
+.hustlify-footer a:hover {
+  color: rgba(255,255,255,.75);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .hustlify-thankyou-inner {
+    width: min(100% - 22px, 940px);
+
+    padding:
+      48px 0 25px;
+  }
+
+  .hustlify-hero {
+    margin-top: 22px;
+  }
+
+  .hustlify-hero h1 {
+    font-size: clamp(38px, 12vw, 58px);
+
+    letter-spacing: -.055em;
+  }
+
+  .hustlify-hero p {
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    max-width: 500px;
+  }
+
+  .hustlify-package {
+    margin-top: 30px;
+
+    padding: 20px;
+
+    border-radius: 20px;
+  }
+
+  .hustlify-package-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+  .hustlify-items {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .hustlify-glass-button {
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 58px;
+
+    padding: 0 20px;
+
+    font-size: 11px;
+  }
+
+  .hustlify-footer {
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 12px;
+
+    margin-top: 42px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hustlify-glass-button,
+  .hustlify-glass-button::before,
+  .hustlify-arrow {
+    transition: none !important;
+  }
+
+}
+
+
+/* =========================================================
+   FALLBACK IF CANVAS IS NOT AVAILABLE
+   ========================================================= */
+
+.hustlify-canvas-fallback {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -5;
+
+  background:
+    radial-gradient(
+      circle at 25% 20%,
+      rgba(194,90,67,.16),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 75% 65%,
+      rgba(47,91,78,.16),
+      transparent 25%
+    ),
+    #08090c;
+}
+</style>
+
+
+<!-- =========================================================
+     PAGE
+     ========================================================= -->
+
+<div id="hustlify-thankyou">
+
+  <!-- fallback -->
+  <div class="hustlify-canvas-fallback"></div>
+
+  <!-- Matte Rise canvas -->
+  <canvas id="hustlify-matte-rise"></canvas>
+
+  <div class="hustlify-bg-overlay"></div>
+
+  <div class="hustlify-grid"></div>
+
+
+  <main class="hustlify-thankyou-inner">
+
+    <!-- SUCCESS -->
+    <div class="hustlify-success-badge">
+      <span class="hustlify-success-dot"></span>
+      Payment Successful
+    </div>
+
+
+    <!-- HERO -->
+    <section class="hustlify-hero">
+
+      <h1>
+        THANK YOU
+        <span>YOU'RE IN! 🎉</span>
+      </h1>
+
+      <p>
+        Your purchase is complete. Your complete
+        <strong>100 AI Side Hustles &amp; Income Ideas</strong>
+        package and all 4 free bonuses are ready for you.
+      </p>
+
+    </section>
+
+
+    <!-- PACKAGE -->
+    <section class="hustlify-package">
+
+      <div class="hustlify-package-top">
+
+        <div class="hustlify-package-title">
+          Your Complete Package
+        </div>
+
+        <div class="hustlify-package-label">
+          Ready to Access
+        </div>
+
+      </div>
+
+
+      <div class="hustlify-items">
+
+        <div class="hustlify-item">
+          <span class="hustlify-check">✓</span>
+          100 AI Side Hustles &amp; Income Ideas
+        </div>
+
+        <div class="hustlify-item">
+          <span class="hustlify-check">✓</span>
+          AI Side Hustle Idea Selector
+        </div>
+
+        <div class="hustlify-item">
+          <span class="hustlify-check">✓</span>
+          30-Day AI Side Hustle Launchpad
+        </div>
+
+        <div class="hustlify-item">
+          <span class="hustlify-check">✓</span>
+          100+ AI Prompts + 100+ AI Tools
+        </div>
+
+        <div class="hustlify-item">
+          <span class="hustlify-check">✓</span>
+          Earn Your First ₹1,000 Strategy
+        </div>
+
+      </div>
+
+
+      <div class="hustlify-bonus-line">
+        + 4 Free Bonuses Included
+      </div>
+
+    </section>
+
+
+    <!-- SINGLE PRIMARY CTA -->
+    <div class="hustlify-cta-area">
+
+      <a
+        class="hustlify-glass-button"
+        href="https://drive.google.com/drive/folders/1KWG_kixCcUqlT08rw8TSwszjymauKbdI?usp=drive_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Access all materials"
+      >
+
+        <span class="hustlify-button-content">
+
+          <span>
+            ACCESS ALL MATERIALS
+          </span>
+
+          <span class="hustlify-arrow">
+            →
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <div class="hustlify-cta-note">
+        One click gives you access to your complete package.
+      </div>
+
+    </div>
+
+
+    <!-- SUPPORT -->
+    <div class="hustlify-support">
+
+      Need help accessing your materials?
+      <br>
+
+      Contact
+      <a href="mailto:hustlify07@gmail.com">
+        hustlify07@gmail.com
+      </a>
+
+    </div>
+
+
+    <!-- BOOKMARK -->
+    <div class="hustlify-bookmark">
+      Tip: Bookmark your materials folder so you can access it anytime.
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer class="hustlify-footer">
+
+      <div>
+        © 2026 Hustlify Shop
+      </div>
+
+      <div class="hustlify-footer-links">
+
+        <a href="#">
+          Privacy Policy
+        </a>
+
+        <span>·</span>
+
+        <a href="#">
+          Terms &amp; Conditions
+        </a>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+
+<script>
+/* =========================================================
+   MATTE RISE — CANVAS EFFECT
+   =========================================================
+
+   This creates the visual layer:
+   - 12 muted museum-style plates
+   - soft procedural noise
+   - diagonal/rising movement
+   - slow orbit
+   - spring-like pointer response
+   - dark presentation
+   ========================================================= */
+
+(function () {
+
+  "use strict";
+
+
+  const canvas =
+    document.getElementById("hustlify-matte-rise");
+
+  if (!canvas) return;
+
+
+  const ctx =
+    canvas.getContext("2d", {
+      alpha: true
+    });
+
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+
+  /* ---------------------------------------------------------
+     MUTED MATTE PALETTE
+     --------------------------------------------------------- */
+
+  const plates = [
+    "#e9e5dd",
+    "#20232a",
+    "#c25a43",
+    "#2f5b4e",
+    "#d6cfc2",
+    "#3a4763",
+    "#dda45c",
+    "#14161a",
+    "#a7b3a4",
+    "#f3f1ec",
+    "#5a6670",
+    "#8c4b3f"
+  ];
+
+
+  /* ---------------------------------------------------------
+     RESIZE
+     --------------------------------------------------------- */
+
+  function resize() {
+
+    dpr =
+      Math.min(
+        window.devicePixelRatio || 1,
+        2
+      );
+
+    width =
+      window.innerWidth;
+
+    height =
+      window.innerHeight;
+
+    canvas.width =
+      Math.floor(width * dpr);
+
+    canvas.height =
+      Math.floor(height * dpr);
+
+    canvas.style.width =
+      width + "px";
+
+    canvas.style.height =
+      height + "px";
+
+    ctx.setTransform(
+      dpr,
+      0,
+      0,
+      dpr,
+      0,
+      0
+    );
+  }
+
+
+  resize();
+
+  window.addEventListener(
+    "resize",
+    resize,
+    { passive: true }
+  );
+
+
+  /* ---------------------------------------------------------
+     POINTER
+     --------------------------------------------------------- */
+
+  let pointerX = 0.5;
+  let pointerY = 0.5;
+
+  let targetX = 0.5;
+  let targetY = 0.5;
+
+
+  window.addEventListener(
+    "pointermove",
+    function (event) {
+
+      targetX =
+        event.clientX /
+        Math.max(window.innerWidth, 1);
+
+      targetY =
+        event.clientY /
+        Math.max(window.innerHeight, 1);
+
+    },
+    { passive: true }
+  );
+
+
+  /* ---------------------------------------------------------
+     MATH HELPERS
+     --------------------------------------------------------- */
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+
+  function clamp(v, min, max) {
+    return Math.max(
+      min,
+      Math.min(max, v)
+    );
+  }
+
+
+  function hexToRgb(hex) {
+
+    const value =
+      parseInt(
+        hex.replace("#", ""),
+        16
+      );
+
+    return {
+      r: (value >> 16) & 255,
+      g: (value >> 8) & 255,
+      b: value & 255
+    };
+  }
+
+
+  /* ---------------------------------------------------------
+     SEEDED RANDOM
+     --------------------------------------------------------- */
+
+  function random(seed) {
+
+    let value = seed;
+
+    return function () {
+
+      value =
+        (value * 9301 + 49297)
+        % 233280;
+
+      return value / 233280;
+    };
+  }
+
+
+  /* ---------------------------------------------------------
+     SOFT NOISE
+     --------------------------------------------------------- */
+
+  function noise(x, y, seed) {
+
+    const r =
+      Math.sin(
+        x * 12.9898 +
+        y * 78.233 +
+        seed * 37.719
+      ) * 43758.5453;
+
+    return (
+      r -
+      Math.floor(r)
+    );
+  }
+
+
+  function fbm(x, y, seed) {
+
+    let value = 0;
+    let amplitude = .5;
+    let frequency = 1;
+
+    for (let i = 0; i < 4; i++) {
+
+      value +=
+        noise(
+          x * frequency,
+          y * frequency,
+          seed + i * 19
+        ) * amplitude;
+
+      amplitude *= .5;
+      frequency *= 2;
+    }
+
+    return value;
+  }
+
+
+  /* ---------------------------------------------------------
+     CREATE PLATE
+     --------------------------------------------------------- */
+
+  function drawPlate(
+    x,
+    y,
+    size,
+    color,
+    index,
+    time
+  ) {
+
+    const rgb =
+      hexToRgb(color);
+
+
+    /*
+      Slow rising noise.
+    */
+
+    const noiseValue =
+      fbm(
+        x * .004 +
+        index * 0.37,
+
+        y * .004 -
+        time * .000025,
+
+        index * 11.7
+      );
+
+
+    const brightness =
+      0.76 +
+      noiseValue * 0.28;
+
+
+    const alpha =
+      0.12 +
+      noiseValue * 0.08;
+
+
+    ctx.save();
+
+
+    /*
+      Rising diagonal movement
+    */
+
+    const diagonal =
+      (time * 0.000018) *
+      (index % 2 === 0 ? 1 : -1);
+
+
+    ctx.translate(
+      x +
+      Math.sin(
+        time * .00018 +
+        index
+      ) * 7,
+
+      y +
+      diagonal * height
+    );
+
+
+    /*
+      Slight rotation
+    */
+
+    ctx.rotate(
+      (
+        -25.5 +
+        Math.sin(
+          time * .00012 +
+          index
+        ) * 2
+      )
+      * Math.PI / 180
+    );
+
+
+    /*
+      Glow
+    */
+
+    ctx.shadowColor =
+      `rgba(
+        ${rgb.r},
+        ${rgb.g},
+        ${rgb.b},
+        .12
+      )`;
+
+    ctx.shadowBlur =
+      28;
+
+
+    /*
+      Matte gradient
+    */
+
+    const gradient =
+      ctx.createLinearGradient(
+        -size / 2,
+        -size / 2,
+        size / 2,
+        size / 2
+      );
+
+
+    gradient.addColorStop(
+      0,
+      `rgba(
+        ${Math.min(rgb.r * brightness, 255)},
+        ${Math.min(rgb.g * brightness, 255)},
+        ${Math.min(rgb.b * brightness, 255)},
+        ${alpha}
+      )`
+    );
+
+
+    gradient.addColorStop(
+      .5,
+      `rgba(
+        ${rgb.r},
+        ${rgb.g},
+        ${rgb.b},
+        ${alpha * .72}
+      )`
+    );
+
+
+    gradient.addColorStop(
+      1,
+      `rgba(
+        ${Math.min(rgb.r * .72, 255)},
+        ${Math.min(rgb.g * .72, 255)},
+        ${Math.min(rgb.b * .72, 255)},
+        ${alpha * .48}
+      )`
+    );
+
+
+    ctx.fillStyle =
+      gradient;
+
+
+    /*
+      Rounded museum plate
+    */
+
+    const radius =
+      Math.min(
+        18,
+        size * .08
+      );
+
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+      -size / 2,
+      -size / 2,
+      size,
+      size,
+      radius
+    );
+
+    ctx.fill();
+
+
+    /*
+      Fine surface noise
+    */
+
+    ctx.globalAlpha =
+      .05;
+
+
+    for (
+      let n = 0;
+      n < 14;
+      n++
+    ) {
+
+      const nx =
+        (Math.random() - .5) *
+        size;
+
+      const ny =
+        (Math.random() - .5) *
+        size;
+
+
+      ctx.fillStyle =
+        "#ffffff";
+
+
+      ctx.fillRect(
+        nx,
+        ny,
+        1,
+        1
+      );
+    }
+
+
+    ctx.restore();
+  }
+
+
+  /* ---------------------------------------------------------
+     RISING RING
+     --------------------------------------------------------- */
+
+  function drawRing(
+    centerX,
+    centerY,
+    radius,
+    time
+  ) {
+
+    const pointerDistance =
+      Math.sqrt(
+        Math.pow(
+          pointerX - .5,
+          2
+        ) +
+        Math.pow(
+          pointerY - .5,
+          2
+        )
+      );
+
+
+    const hover =
+      clamp(
+        1 -
+        pointerDistance * 1.8,
+        0,
+        1
+      );
+
+
+    /*
+      Spring-like acceleration.
+    */
+
+    const spring =
+      1 +
+      hover * .65;
+
+
+    const rotation =
+      time *
+      .00013 *
+      spring;
+
+
+    ctx.save();
+
+
+    ctx.translate(
+      centerX,
+      centerY
+    );
+
+
+    ctx.rotate(rotation);
+
+
+    ctx.lineWidth = 1.4;
+
+
+    /*
+      Outer ring
+    */
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      radius,
+      0,
+      Math.PI * 2
+    );
+
+
+    ctx.strokeStyle =
+      `rgba(
+        255,
+        255,
+        255,
+        ${0.12 + hover * .22}
+      )`;
+
+
+    ctx.stroke();
+
+
+    /*
+      12 ascending plates
+    */
+
+    for (
+      let i = 0;
+      i < 12;
+      i++
+    ) {
+
+      const angle =
+        (
+          i / 12
+        ) *
+        Math.PI *
+        2;
+
+
+      const px =
+        Math.cos(angle) *
+        radius;
+
+
+      const py =
+        Math.sin(angle) *
+        radius;
+
+
+      const tileSize =
+        46 +
+        hover * 14;
+
+
+      drawPlate(
+        px,
+        py,
+        tileSize,
+        plates[i],
+        i,
+        time
+      );
+    }
+
+
+    /*
+      Inner ring
+    */
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      radius * .72,
+      0,
+      Math.PI * 2
+    );
+
+
+    ctx.strokeStyle =
+      `rgba(
+        255,
+        255,
+        255,
+        ${0.045 + hover * .08}
+      )`;
+
+
+    ctx.stroke();
+
+
+    ctx.restore();
+  }
+
+
+  /* ---------------------------------------------------------
+     MAIN RENDER
+     --------------------------------------------------------- */
+
+  function render(time) {
+
+    /*
+      Smooth pointer tracking
+    */
+
+    pointerX =
+      lerp(
+        pointerX,
+        targetX,
+        .035
+      );
+
+    pointerY =
+      lerp(
+        pointerY,
+        targetY,
+        .035
+      );
+
+
+    ctx.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    /*
+      Very subtle ambient plates
+    */
+
+    const plateSize =
+      Math.min(
+        width,
+        height
+      ) * .17;
+
+
+    const spacing =
+      plateSize * 1.38;
+
+
+    /*
+      Diagonal gallery arrangement
+    */
+
+    for (
+      let row = -2;
+      row < 6;
+      row++
+    ) {
+
+      for (
+        let col = -2;
+        col < 6;
+        col++
+      ) {
+
+        const index =
+          Math.abs(
+            row * 5 +
+            col
+          ) % 12;
+
+
+        const x =
+          width * .5 +
+          (
+            col -
+            1.5
+          ) *
+          spacing +
+          row *
+          plateSize *
+          .32;
+
+
+        const y =
+          height * .5 +
+          (
+            row -
+            2
+          ) *
+          spacing;
+
+
+        drawPlate(
+          x,
+          y,
+          plateSize,
+          plates[index],
+          index,
+          time
+        );
+      }
+    }
+
+
+    /*
+      Rising central ring
+    */
+
+    drawRing(
+      width * .5,
+      height * .47,
+      Math.min(
+        width,
+        height
+      ) * .25,
+      time
+    );
+
+
+    requestAnimationFrame(
+      render
+    );
+  }
+
+
+  requestAnimationFrame(
+    render
+  );
+
+})();
+</script>
