@@ -1,0 +1,3369 @@
+<!-- ========================================================
+     CAFE ELEVEN:ELEVEN (11:11) - SYSTEME.IO CODE
+     ======================================================== -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- LocalBusiness Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Cafe Eleven:Eleven (11:11)",
+  "alternateName": "कैफे इलेवन:इलेवन (11:11)",
+  "image": "assets/cafe-photo-8.jpeg",
+  "description": "A cozy café in the heart of Sinnar, serving delicious food, coffee and good vibes at prices you'll love.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Front of IDBI Bank, Devi Rd, Ganesh Society",
+    "addressLocality": "Sinnar",
+    "addressRegion": "Maharashtra",
+    "postalCode": "422103",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.8475,
+    "longitude": 73.9982
+  },
+  "hasMap": "https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra",
+  "priceRange": "₹1–200",
+  "servesCuisine": ["Cafe", "Coffee", "Pizza", "Sandwiches", "Fast Food"],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "closes": "23:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "171",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Dine-in", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Drive-through", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Delivery", "value": true}
+  ]
+}
+</script>
+
+<style>
+  /* ========================================================
+     CSS DESIGN TOKENS & SYSTEM
+     ======================================================== */
+  :root {
+    --espresso-950: #100a07;
+    --espresso-900: #17100b;
+    --espresso-850: #1f1610;
+    --espresso-800: #291e17;
+    --espresso-700: #3b2c22;
+    --espresso-600: #543f32;
+    
+    --caramel-600: #a86c3b;
+    --caramel-500: #c58953;
+    --caramel-400: #dba271;
+    --caramel-300: #ebd0b5;
+    --caramel-100: #f7ede3;
+
+    --cream-50: #faf7f2;
+    --cream-100: #f4eee5;
+    --cream-200: #ebe2d5;
+    --cream-300: #dfd2c1;
+
+    --terracotta: #b05c3c;
+    --gold-star: #e5a93c;
+    
+    --text-dark: #221813;
+    --text-muted: #6b5a4e;
+    --text-subtle: #988577;
+    --text-light: #f7f3ee;
+    --text-light-muted: #cfc2b6;
+
+    --border-light: rgba(41, 30, 23, 0.08);
+    --border-medium: rgba(41, 30, 23, 0.15);
+    --border-dark: rgba(247, 243, 238, 0.12);
+
+    --shadow-sm: 0 4px 12px rgba(23, 16, 11, 0.04);
+    --shadow-md: 0 12px 30px rgba(23, 16, 11, 0.08);
+    --shadow-lg: 0 24px 50px rgba(23, 16, 11, 0.12);
+    --shadow-xl: 0 32px 70px rgba(23, 16, 11, 0.18);
+
+    --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-marathi: 'Noto Serif Devanagari', 'Cormorant Garamond', serif;
+
+    --container-max: 1240px;
+    --container-pad: clamp(1.25rem, 4vw, 2.5rem);
+    --nav-height: 82px;
+    --nav-height-scrolled: 68px;
+
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+  }
+
+  /* Reset & Base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Systeme.io Container & Element Overrides (Ensures edge-to-edge full width) */
+  .c-section, .row, .container-fluid, .content-wrapper, [data-element="html"], [data-type="html"] {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--cream-50);
+    color: var(--text-dark);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+
+  /* Premium Café Background Refresh */
+  body {
+    background:
+      radial-gradient(circle at 12% 8%, rgba(219,162,113,.18), transparent 30%),
+      radial-gradient(circle at 88% 18%, rgba(176,92,60,.10), transparent 28%),
+      radial-gradient(circle at 50% 70%, rgba(197,137,83,.08), transparent 38%),
+      linear-gradient(180deg, #fffaf4 0%, #faf7f2 42%, #f4eee5 100%);
+  }
+
+  .hero-section {
+    background:
+      linear-gradient(120deg, rgba(250,247,242,.96) 0%, rgba(250,247,242,.86) 45%, rgba(239,220,199,.72) 100%),
+      radial-gradient(circle at 85% 20%, rgba(197,137,83,.28), transparent 35%),
+      radial-gradient(circle at 8% 80%, rgba(176,92,60,.12), transparent 32%);
+  }
+
+  .hero-section::before, .hero-section::after {
+    content: ''; position:absolute; border-radius:50%; pointer-events:none;
+    filter: blur(2px); opacity:.55;
+  }
+  .hero-section::before { width:420px; height:420px; right:-170px; top:12%; background:rgba(255,255,255,.42); box-shadow:0 0 100px rgba(197,137,83,.18); }
+  .hero-section::after { width:260px; height:260px; left:-120px; bottom:5%; background:rgba(219,162,113,.12); }
+
+  .popular-section, .gallery-section, .location-section {
+    background:
+      radial-gradient(circle at 90% 10%, rgba(219,162,113,.10), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #fbf7f1 100%);
+  }
+
+  .about-section, .menu-section, .reviews-section {
+    background:
+      radial-gradient(circle at 8% 15%, rgba(197,137,83,.10), transparent 25%),
+      linear-gradient(180deg, #faf7f2 0%, #f1e8dc 100%);
+  }
+
+  .food-card, .menu-table-container, .review-card, .address-card {
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(10px);
+  }
+
+  .gallery-item img, .card-media img, .about-main-image {
+    filter: saturate(1.06) contrast(1.02);
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      background:
+        linear-gradient(180deg, rgba(250,247,242,.98) 0%, rgba(247,237,227,.94) 100%);
+    }
+    .hero-section::before { width:260px; height:260px; right:-140px; top:20%; }
+    .hero-section::after { width:180px; height:180px; left:-100px; bottom:8%; }
+    .hero-image-frame { box-shadow: 0 22px 55px rgba(23,16,11,.20); }
+  }
+
+  ::selection {
+    background-color: var(--caramel-400);
+    color: var(--espresso-950);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+  }
+
+  .tagline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-full);
+    background-color: rgba(197, 137, 83, 0.12);
+    border: 1px solid rgba(197, 137, 83, 0.28);
+    color: var(--caramel-600);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .tagline-badge.tagline-dark {
+    background-color: rgba(223, 208, 181, 0.12);
+    border-color: rgba(223, 208, 181, 0.24);
+    color: var(--caramel-300);
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--espresso-900);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--text-muted);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  .section-header {
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .section-header.text-center {
+    text-align: center;
+  }
+
+  .section-header.text-center .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.95rem 1.85rem;
+    border-radius: var(--radius-full);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: all 350ms var(--ease-smooth);
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background-color: var(--espresso-900);
+    color: var(--cream-50);
+    border: 1px solid var(--espresso-900);
+    box-shadow: 0 8px 24px rgba(23, 16, 11, 0.18);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--caramel-600);
+    border-color: var(--caramel-600);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(168, 108, 59, 0.3);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--espresso-900);
+    border: 1px solid var(--border-medium);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--espresso-900);
+    background-color: rgba(41, 30, 23, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .btn-caramel {
+    background-color: var(--caramel-500);
+    color: #ffffff;
+    border: 1px solid var(--caramel-500);
+    box-shadow: 0 8px 20px rgba(197, 137, 83, 0.28);
+  }
+
+  .btn-caramel:hover {
+    background-color: var(--caramel-600);
+    border-color: var(--caramel-600);
+    transform: translateY(-2px);
+  }
+
+  .btn-light {
+    background-color: var(--cream-50);
+    color: var(--espresso-900);
+    border: 1px solid var(--cream-50);
+  }
+
+  .btn-light-outline {
+    background-color: transparent;
+    color: var(--cream-50);
+    border: 1px solid rgba(250, 247, 242, 0.35);
+  }
+
+  .btn-light-outline:hover {
+    border-color: var(--cream-50);
+    background-color: rgba(250, 247, 242, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .btn-sm {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+
+  .btn:hover .btn-icon {
+    transform: translateX(4px);
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke-width: 1.8;
+    stroke: currentColor;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  /* Navigation Bar */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    z-index: 1000;
+    transition: all 350ms var(--ease-smooth);
+  }
+
+  .site-header.scrolled {
+    height: var(--nav-height-scrolled);
+    background-color: rgba(250, 247, 242, 0.94);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 4px 20px rgba(23, 16, 11, 0.05);
+    border-bottom: 1px solid rgba(41, 30, 23, 0.06);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .brand-logo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-numbers {
+    font-family: var(--font-display);
+    font-size: 1.625rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--espresso-900);
+    line-height: 1;
+  }
+
+  .logo-name {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--caramel-600);
+    line-height: 1.2;
+    margin-top: 2px;
+  }
+
+  .logo-marathi {
+    font-family: var(--font-marathi);
+    font-size: 0.6875rem;
+    color: var(--text-subtle);
+    line-height: 1;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--espresso-800);
+    position: relative;
+    padding: 0.35rem 0;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--caramel-500);
+    transition: width 350ms var(--ease-smooth);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-medium);
+    color: var(--espresso-900);
+    z-index: 1100;
+  }
+
+  .hamburger-bar {
+    width: 20px;
+    height: 2px;
+    background-color: currentColor;
+    margin: 2.5px 0;
+    transition: 0.3s ease;
+  }
+
+  .mobile-menu-toggle.is-active .hamburger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-menu-toggle.is-active .hamburger-bar:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.is-active .hamburger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(85vw, 360px);
+    background-color: var(--cream-50);
+    box-shadow: -10px 0 40px rgba(23, 16, 11, 0.15);
+    z-index: 1050;
+    padding: 6rem 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateX(100%);
+    transition: transform 350ms var(--ease-smooth);
+  }
+
+  .mobile-nav.is-open { transform: translateX(0); }
+
+  .mobile-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(23, 16, 11, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 350ms ease;
+  }
+
+  .mobile-nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+  .mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .mobile-link {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: var(--espresso-900);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: calc(var(--nav-height) + 2rem);
+    padding-bottom: 4rem;
+    overflow: hidden;
+    background: radial-gradient(circle at 85% 25%, rgba(223, 162, 113, 0.12) 0%, rgba(250, 247, 242, 0) 50%),
+                radial-gradient(circle at 10% 75%, rgba(197, 137, 83, 0.08) 0%, rgba(250, 247, 242, 0) 45%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .hero-brand-subtitle {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--caramel-600);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 6.2vw, 4.75rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--espresso-950);
+  }
+
+  .hero-title .emphasis {
+    font-style: italic;
+    color: var(--caramel-600);
+    font-weight: 400;
+  }
+
+  .hero-desc {
+    font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid rgba(41, 30, 23, 0.08);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .star-cluster {
+    display: flex;
+    gap: 2px;
+    color: var(--gold-star);
+  }
+
+  /* Hero Café Subtle Floating Animation */
+  @keyframes cafeFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0.4deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image-frame {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 200px 200px 32px 32px;
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    background-color: var(--cream-200);
+    aspect-ratio: 4 / 5;
+    animation: cafeFloat 5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .hero-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.03);
+    transition: transform 1.2s var(--ease-smooth);
+  }
+
+  .hero-visual:hover .hero-main-img { transform: scale(1.08); }
+
+  .hero-float-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    padding: 0.875rem 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    z-index: 3;
+    transition: transform 350ms var(--ease-smooth);
+  }
+
+  .hero-float-card:hover { transform: translateY(-4px); }
+  .hero-float-left { left: -1.5rem; bottom: 18%; }
+  .hero-float-right { right: -1rem; top: 15%; }
+
+  .card-icon-pill {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--caramel-100);
+    color: var(--caramel-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .card-meta-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--espresso-900);
+    line-height: 1.2;
+  }
+
+  .card-meta-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* Trust Strip */
+  .trust-strip {
+    padding: 2.25rem 0;
+    background-color: #ffffff;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .trust-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .trust-strip-item {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid var(--border-light);
+  }
+
+  .trust-strip-item:last-child { border-right: none; }
+
+  .trust-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background-color: var(--cream-100);
+    color: var(--espresso-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .trust-stat-title {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 700;
+    color: var(--espresso-950);
+    line-height: 1.1;
+  }
+
+  .trust-stat-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  /* About Section */
+  .about-section {
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    background-color: var(--cream-50);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .about-media-stack { position: relative; }
+
+  .about-main-image {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about-accent-badge {
+    position: absolute;
+    bottom: -1.75rem;
+    right: -1.5rem;
+    background-color: var(--espresso-900);
+    color: var(--cream-50);
+    padding: 1.75rem 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    max-width: 260px;
+  }
+
+  .badge-quote {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--caramel-300);
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+  }
+
+  .badge-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light-muted);
+  }
+
+  .about-lead {
+    font-size: 1.125rem;
+    color: var(--espresso-800);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-triad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    margin: 1.75rem 0 2.25rem;
+    border-top: 1px solid var(--border-medium);
+    border-bottom: 1px solid var(--border-medium);
+  }
+
+  .triad-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--espresso-900);
+  }
+
+  .triad-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--caramel-500);
+  }
+
+  /* Popular Section */
+  .popular-section {
+    padding: clamp(4.5rem, 8vw, 7.5rem) 0;
+    background-color: #ffffff;
+  }
+
+  .popular-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .food-card {
+    background-color: var(--cream-50);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 350ms var(--ease-smooth);
+  }
+
+  .food-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(197, 137, 83, 0.35);
+  }
+
+  .card-media {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: var(--cream-200);
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-smooth);
+  }
+
+  .food-card:hover .card-media img { transform: scale(1.08); }
+
+  .card-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(23, 16, 11, 0.85);
+    backdrop-filter: blur(8px);
+    color: var(--cream-50);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+  }
+
+  .card-body {
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .card-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--espresso-950);
+    line-height: 1.2;
+  }
+
+  .card-price {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--caramel-600);
+    background-color: rgba(197, 137, 83, 0.1);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .card-service-meta {
+    font-size: 0.75rem;
+    color: var(--text-subtle);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .card-action-link {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--espresso-900);
+  }
+
+  /* Experience Section */
+  .experience-section {
+    position: relative;
+    padding: clamp(5.5rem, 10vw, 8.5rem) 0;
+    background-color: var(--espresso-950);
+    color: var(--cream-50);
+    overflow: hidden;
+  }
+
+  .experience-bg-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(197, 137, 83, 0.15) 0%, rgba(23, 16, 11, 0) 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .experience-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(3rem, 6vw, 4.5rem);
+    position: relative;
+    z-index: 2;
+  }
+
+  .experience-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.12;
+    color: var(--cream-50);
+    margin-bottom: 1.25rem;
+  }
+
+  .experience-desc {
+    font-size: 1.125rem;
+    color: var(--text-light-muted);
+    line-height: 1.7;
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .experience-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 350ms var(--ease-smooth);
+  }
+
+  .experience-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(223, 162, 113, 0.35);
+    background-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .exp-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background-color: rgba(223, 162, 113, 0.12);
+    border: 1px solid rgba(223, 162, 113, 0.25);
+    color: var(--caramel-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .exp-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: var(--cream-50);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-card-desc {
+    font-size: 0.9375rem;
+    color: var(--text-light-muted);
+    line-height: 1.65;
+  }
+
+  /* Menu Section */
+  .menu-section {
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    background-color: var(--cream-50);
+  }
+
+  .menu-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-bottom: 3rem;
+  }
+
+  .menu-tab-btn {
+    padding: 0.65rem 1.35rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--espresso-800);
+    background-color: #ffffff;
+    border: 1px solid var(--border-medium);
+    transition: all 200ms ease;
+  }
+
+  .menu-tab-btn.is-active {
+    background-color: var(--espresso-900);
+    color: var(--cream-50);
+    border-color: var(--espresso-900);
+    box-shadow: 0 4px 14px rgba(23, 16, 11, 0.15);
+  }
+
+  .menu-table-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .menu-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--border-medium);
+  }
+
+  .menu-item-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .item-meta { flex: 1; padding-right: 1.5rem; }
+
+  .item-name-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .item-name {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--espresso-950);
+  }
+
+  .item-badge-popular {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: var(--caramel-100);
+    color: var(--caramel-600);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+  }
+
+  .item-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .item-price {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--caramel-600);
+    white-space: nowrap;
+    background-color: var(--cream-100);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .menu-notice-box {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md);
+    background-color: var(--cream-100);
+    border: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* Gallery Section */
+  .gallery-section {
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    background-color: #ffffff;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 280px;
+    gap: 1.5rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    background-color: var(--cream-200);
+  }
+
+  .gallery-item.span-2-row { grid-row: span 2; }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease-smooth);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(23, 16, 11, 0.85) 0%, rgba(23, 16, 11, 0.2) 60%, transparent 100%);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    transition: opacity 350ms ease;
+  }
+
+  .gallery-item:hover img { transform: scale(1.08); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-caption {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .gallery-view-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Lightbox */
+  .lightbox-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(16, 10, 7, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 350ms ease;
+  }
+
+  .lightbox-modal.is-active { display: flex; opacity: 1; }
+
+  .lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+  }
+
+  .lightbox-caption {
+    margin-top: 1rem;
+    color: var(--cream-100);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+
+  /* Reviews Section */
+  .reviews-section {
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    background-color: var(--cream-50);
+  }
+
+  .reviews-score-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background-color: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.5rem;
+    margin-bottom: 3.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .score-summary {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .score-number {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--espresso-950);
+    line-height: 1;
+  }
+
+  .score-meta-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--espresso-900);
+    margin-bottom: 0.25rem;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .review-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    transition: transform 350ms var(--ease-smooth);
+  }
+
+  .review-card:hover { transform: translateY(-6px); }
+
+  .review-stars {
+    display: flex;
+    gap: 3px;
+    color: var(--gold-star);
+    margin-bottom: 1.25rem;
+  }
+
+  .review-quote {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--espresso-900);
+    line-height: 1.55;
+    margin-bottom: 1.75rem;
+    flex-grow: 1;
+  }
+
+  .review-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .review-avatar-pill {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--cream-100);
+    color: var(--caramel-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  /* Location Section */
+  .location-section {
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    background-color: #ffffff;
+  }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .address-card {
+    background-color: var(--cream-50);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .address-row {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .address-row:last-child { margin-bottom: 0; }
+
+  .loc-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--cream-200);
+    color: var(--espresso-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .loc-heading {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--caramel-600);
+    margin-bottom: 0.35rem;
+  }
+
+  .loc-text {
+    font-size: 1rem;
+    color: var(--espresso-900);
+    line-height: 1.6;
+  }
+
+  .loc-code-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    font-size: 0.8125rem;
+  }
+
+  .live-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e7e34;
+    margin-top: 0.25rem;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #28a745;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+    animation: pulseGreen 2s infinite;
+  }
+
+  @keyframes pulseGreen {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.6); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+  }
+
+  .map-container {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-medium);
+    min-height: 440px;
+    background-color: var(--cream-100);
+  }
+
+  .map-frame-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 440px;
+  }
+
+  .interactive-map-frame {
+    width: 100%;
+    height: 100%;
+    min-height: 440px;
+    border: none;
+  }
+
+  .map-pin-overlay {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* CTA Banner */
+  .cta-banner-section {
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    background: linear-gradient(135deg, var(--espresso-950) 0%, var(--espresso-850) 100%);
+    color: var(--cream-50);
+    text-align: center;
+  }
+
+  .cta-banner-card {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--cream-50);
+    margin-bottom: 1.25rem;
+  }
+
+  .cta-desc {
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    color: var(--text-light-muted);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-buttons-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .services-available-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.75rem 1.75rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    color: var(--cream-100);
+  }
+
+  .service-dot-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .service-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--caramel-400);
+  }
+
+  /* Footer */
+  .site-footer {
+    background-color: var(--espresso-950);
+    color: var(--text-light-muted);
+    padding: 5rem 0 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.9375rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .footer-brand-title {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--caramel-300);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .social-links-row {
+    display: flex;
+    gap: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 200ms ease;
+  }
+
+  .social-icon-btn:hover { background-color: var(--caramel-500); }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.8125rem;
+    color: var(--text-subtle);
+  }
+
+  /* Back to Top & Toast */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--espresso-900);
+    color: var(--cream-50);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition: all 350ms var(--ease-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .toast-msg {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--espresso-950);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-xl);
+    font-size: 0.875rem;
+    z-index: 2100;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s var(--ease-smooth);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .toast-msg.is-show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* Fade-up scroll animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+  }
+
+  .fade-up.is-inview {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+
+  /* Accessibility: Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .fade-up { opacity: 1 !important; transform: none !important; }
+    .hero-image-frame { animation: none !important; transform: none !important; }
+  }
+
+  /* Responsive Media Queries */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; text-align: center; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .hero-cta-group { justify-content: center; }
+    .hero-trust-badge { margin: 0 auto; }
+    .hero-image-frame { max-width: 440px; margin: 0 auto; }
+    .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    .popular-grid { grid-template-columns: repeat(2, 1fr); }
+    .experience-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.span-2-row { grid-row: span 1; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .location-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-image-frame {
+      max-width: 380px;
+      animation: cafeFloatMobile 6s ease-in-out infinite;
+    }
+
+    @keyframes cafeFloatMobile {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-4px) rotate(0.2deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    .nav-links, .header-actions .btn { display: none; }
+    .mobile-menu-toggle { display: flex; }
+    .trust-strip-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-strip-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+    .popular-grid { grid-template-columns: 1fr; }
+    .hero-float-card { display: none; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .trust-strip-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .hero-cta-group .btn, .cta-buttons-wrap .btn { width: 100%; }
+  }
+
+  /* ========================================================
+     MOBILE / TOUCH OPTIMIZATION
+     Keeps the desktop design intact while making the page
+     comfortable and stable on phones (including narrow screens).
+     ======================================================== */
+  @media (max-width: 768px) {
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    /* Header */
+    .site-header {
+      height: 70px;
+    }
+
+    .site-header.scrolled {
+      height: 64px;
+    }
+
+    .header-inner {
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      min-width: 0;
+      max-width: calc(100% - 58px);
+    }
+
+    .logo-numbers {
+      font-size: 1.35rem;
+    }
+
+    .logo-name {
+      font-size: 0.58rem;
+      letter-spacing: 0.13em;
+      white-space: nowrap;
+    }
+
+    .logo-marathi {
+      font-size: 0.6rem;
+      white-space: nowrap;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+      flex: 0 0 44px;
+    }
+
+    /* Prevent horizontal overflow from large visual elements/cards */
+    .hero-section,
+    .about-section,
+    .popular-section,
+    .experience-section,
+    .menu-section,
+    .gallery-section,
+    .reviews-section,
+    .location-section,
+    .cta-banner-section,
+    .site-footer {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-section {
+      min-height: auto;
+      padding-top: 100px;
+      padding-bottom: 56px;
+    }
+
+    .hero-grid {
+      width: 100%;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
+    }
+
+    .hero-content {
+      min-width: 0;
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 11vw, 3.25rem);
+      line-height: 1.08;
+      overflow-wrap: break-word;
+    }
+
+    .hero-desc {
+      max-width: 100%;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .hero-cta-group,
+    .cta-buttons-wrap {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+
+    .hero-cta-group .btn,
+    .cta-buttons-wrap .btn {
+      width: 100%;
+      max-width: 100%;
+      min-height: 50px;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .hero-trust-badge {
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-visual {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .hero-image-frame {
+      width: min(100%, 360px);
+      max-width: 360px;
+      aspect-ratio: 4 / 5;
+      margin: 0 auto;
+    }
+
+    /* Trust strip */
+    .trust-strip {
+      padding: 1.25rem 0;
+    }
+
+    .trust-strip-grid {
+      width: 100%;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .trust-strip-item {
+      width: 100%;
+      padding: 0.9rem 0;
+      border-right: 0 !important;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .trust-strip-item:last-child {
+      border-bottom: 0;
+    }
+
+    /* Section typography */
+    .section-title,
+    .experience-title,
+    .cta-title {
+      font-size: clamp(2rem, 9vw, 2.75rem);
+      overflow-wrap: break-word;
+    }
+
+    .section-subtitle {
+      max-width: 100%;
+    }
+
+    /* About */
+    .about-section,
+    .popular-section,
+    .menu-section,
+    .gallery-section,
+    .reviews-section,
+    .location-section,
+    .cta-banner-section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .about-grid,
+    .location-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
+    }
+
+    .about-main-image {
+      height: auto;
+      min-height: 300px;
+      max-height: 440px;
+    }
+
+    .about-accent-badge {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      margin: -28px 14px 0 auto;
+      max-width: calc(100% - 28px);
+      padding: 1.25rem 1.4rem;
+    }
+
+    .about-triad {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Cards */
+    .popular-grid,
+    .experience-grid,
+    .reviews-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+
+    .card-media {
+      height: 230px;
+    }
+
+    .food-card,
+    .experience-card,
+    .review-card {
+      min-width: 0;
+    }
+
+    .card-body {
+      padding: 1.35rem 1.2rem 1.2rem;
+    }
+
+    .card-header-row {
+      flex-wrap: wrap;
+    }
+
+    .card-price {
+      flex-shrink: 0;
+    }
+
+    /* Menu */
+    .menu-tabs {
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 2px 2px 8px;
+      margin-left: -2px;
+      margin-right: -2px;
+    }
+
+    .menu-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu-tab-btn {
+      flex: 0 0 auto;
+      min-height: 44px;
+    }
+
+    .menu-table-container {
+      width: 100%;
+      max-width: 100%;
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+    }
+
+    .menu-item-row {
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .item-meta {
+      min-width: 0;
+      padding-right: 0;
+    }
+
+    .item-name-wrap {
+      flex-wrap: wrap;
+    }
+
+    .item-name {
+      font-size: 1.2rem;
+    }
+
+    .item-price {
+      flex: 0 0 auto;
+    }
+
+    .menu-notice-box {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 240px;
+      gap: 0.9rem;
+    }
+
+    .gallery-item.span-2-row {
+      grid-row: span 1;
+    }
+
+    .gallery-overlay {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(23, 16, 11, 0.7), transparent 65%);
+    }
+
+    /* Lightbox: fit phone screens and keep controls reachable */
+    .lightbox-modal {
+      padding: 1rem;
+    }
+
+    .lightbox-content {
+      width: 100%;
+      max-width: 100%;
+      max-height: 82vh;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
+    }
+
+    .lightbox-close {
+      top: 0.75rem;
+      right: 0.75rem;
+      width: 42px;
+      height: 42px;
+    }
+
+    .lightbox-nav-btn {
+      width: 42px;
+      height: 42px;
+    }
+
+    .lightbox-prev { left: 0.5rem; }
+    .lightbox-next { right: 0.5rem; }
+
+    /* Reviews */
+    .reviews-score-card {
+      padding: 1.35rem;
+      align-items: flex-start;
+    }
+
+    .score-summary {
+      width: 100%;
+      gap: 1rem;
+    }
+
+    .score-number {
+      font-size: 2.8rem;
+    }
+
+    /* Location / map */
+    .address-card {
+      padding: 1.35rem;
+    }
+
+    .address-row {
+      gap: 0.9rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .map-container,
+    .map-frame-wrapper,
+    .interactive-map-frame {
+      min-height: 360px;
+    }
+
+    .map-pin-overlay {
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.75rem;
+      padding: 1rem;
+    }
+
+    /* CTA / services pill */
+    .services-available-pill {
+      width: 100%;
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem 1rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Floating controls */
+    .back-to-top {
+      width: 44px;
+      height: 44px;
+      right: 14px;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+    }
+
+    /* Touch targets */
+    .nav-link,
+    .mobile-link,
+    .menu-tab-btn,
+    .social-icon-btn,
+    .back-to-top,
+    .lightbox-close,
+    .lightbox-nav-btn,
+    .mobile-menu-toggle {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .hero-section {
+      padding-top: 92px;
+      padding-bottom: 46px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.15rem, 12vw, 2.8rem);
+    }
+
+    .hero-image-frame {
+      width: min(100%, 330px);
+    }
+
+    .tagline-badge {
+      max-width: 100%;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.75rem;
+    }
+
+    .section-header {
+      margin-bottom: 2.25rem;
+    }
+
+    .menu-table-container {
+      padding: 1rem;
+    }
+
+    .menu-item-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .item-price {
+      align-self: flex-start;
+    }
+
+    .map-container,
+    .map-frame-wrapper,
+    .interactive-map-frame {
+      min-height: 320px;
+    }
+
+    .mobile-nav {
+      width: min(88vw, 340px);
+      padding-left: 1.35rem;
+      padding-right: 1.35rem;
+    }
+
+    .mobile-link {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .container {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .logo-name {
+      font-size: 0.52rem;
+    }
+
+    .logo-marathi {
+      font-size: 0.55rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+    }
+
+    .hero-image-frame {
+      width: min(100%, 300px);
+    }
+
+    .menu-table-container {
+      padding: 0.85rem;
+    }
+  }
+
+
+  /* Client-supplied photography treatment */
+  .provided-photo, .gallery-item img, .about-main-image, .hero-main-img {
+    background: #ead9c7;
+  }
+  .hero-main-img { object-position: center center; }
+  .about-main-image { object-position: center center; }
+  .provided-photo { object-position: center center; }
+
+</style>
+
+<!-- ========================================================
+     WEBSITE HTML MARKUP
+     ======================================================== -->
+
+<!-- Navigation Header -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#hero" class="brand-logo" aria-label="Cafe Eleven Eleven Home">
+      <span class="logo-numbers">11:11</span>
+      <span class="logo-name">Cafe Eleven:Eleven</span>
+      <span class="logo-marathi">कैफे इलेवन:इलेवन</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary Navigation">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#popular" class="nav-link">Popular</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#location" class="nav-link">Visit Us</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#location" class="btn btn-primary btn-sm">
+        <span>Order / Visit Us</span>
+        <svg class="icon btn-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+<aside class="mobile-nav" id="mobileNav">
+  <div class="mobile-links">
+    <a href="#hero" class="mobile-link" data-nav-link>Home</a>
+    <a href="#about" class="mobile-link" data-nav-link>About</a>
+    <a href="#popular" class="mobile-link" data-nav-link>Popular Picks</a>
+    <a href="#menu" class="mobile-link" data-nav-link>Full Menu</a>
+    <a href="#gallery" class="mobile-link" data-nav-link>Gallery</a>
+    <a href="#reviews" class="mobile-link" data-nav-link>Reviews</a>
+    <a href="#location" class="mobile-link" data-nav-link>Visit Us</a>
+  </div>
+  <div style="border-top: 1px solid var(--border-light); padding-top: 1.5rem;">
+    <div style="font-size:0.875rem; color:var(--text-muted); margin-bottom: 0.5rem;">Front of IDBI Bank, Sinnar</div>
+    <div style="font-size:0.875rem; color:var(--text-muted); margin-bottom: 1rem;">Open daily until 11:00 PM</div>
+    <a href="#location" class="btn btn-caramel btn-sm" data-nav-link style="width:100%; text-align:center;">Get Directions</a>
+  </div>
+</aside>
+
+<!-- Hero Section -->
+<section class="hero-section" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="fade-up">
+          <span class="tagline-badge">
+            <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            Sinnar, Maharashtra
+          </span>
+        </div>
+
+        <div class="fade-up delay-1" style="margin-bottom: 1.5rem;">
+          <span class="hero-brand-subtitle">CAFE ELEVEN:ELEVEN (11:11)</span>
+          <h1 class="hero-title">
+            Good Coffee.<br>
+            Great Food.<br>
+            <span class="emphasis">Better Vibes.</span>
+          </h1>
+        </div>
+
+        <p class="hero-desc fade-up delay-2">
+          A cozy café in the heart of Sinnar, serving delicious food, coffee and good vibes at prices you'll love.
+        </p>
+
+        <div class="hero-cta-group fade-up delay-3">
+          <a href="#popular" class="btn btn-primary">
+            <span>Explore Menu</span>
+            <svg class="icon btn-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#location" class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Get Directions</span>
+          </a>
+        </div>
+
+        <div class="fade-up delay-3">
+          <div class="hero-trust-badge">
+            <div class="star-cluster">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div style="font-size:0.875rem; font-weight:600; color:var(--espresso-900);">
+              4.8 / 5 <span style="color:var(--text-subtle); font-weight:400;">from 171 Google Reviews</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual with Real Google Maps Interior & Floating Animation -->
+      <div class="hero-visual fade-up delay-2">
+        <div class="hero-image-frame">
+          <img 
+            id="heroImage"
+            src="assets/cafe-photo-8.jpeg" 
+            alt="Cafe Eleven:Eleven Real Interior & Table Ambience" 
+            class="hero-main-img"
+            loading="eager"
+          >
+        </div>
+
+        <div class="hero-float-card hero-float-left">
+          <div class="card-icon-pill">☕</div>
+          <div>
+            <div class="card-meta-title">Thick & Mocha Coffee</div>
+            <div class="card-meta-desc">Customer favorite brews</div>
+          </div>
+        </div>
+
+        <div class="hero-float-card hero-float-right">
+          <div class="card-icon-pill">🍕</div>
+          <div>
+            <div class="card-meta-title">Tandoor Paneer Pizza</div>
+            <div class="card-meta-desc">Hot, fresh & cheesy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<section class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-grid">
+      <div class="trust-strip-item">
+        <div class="trust-icon-box">★</div>
+        <div>
+          <div class="trust-stat-title"><span class="counter" data-target="4.8">4.8</span>★</div>
+          <div class="trust-stat-label">Google Rating</div>
+        </div>
+      </div>
+
+      <div class="trust-strip-item">
+        <div class="trust-icon-box">💬</div>
+        <div>
+          <div class="trust-stat-title"><span class="counter" data-target="171">171</span>+</div>
+          <div class="trust-stat-label">Verified Customer Reviews</div>
+        </div>
+      </div>
+
+      <div class="trust-strip-item">
+        <div class="trust-icon-box">₹</div>
+        <div>
+          <div class="trust-stat-title">₹1–200</div>
+          <div class="trust-stat-label">Affordable Price Range</div>
+        </div>
+      </div>
+
+      <div class="trust-strip-item">
+        <div class="trust-icon-box">✓</div>
+        <div>
+          <div class="trust-stat-title" style="font-size:1.25rem;">Dine-In • Takeaway</div>
+          <div class="trust-stat-label">Drive-through & Delivery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-media-stack fade-up">
+        <img 
+          id="aboutImage"
+          src="assets/cafe-photo-9.jpeg" 
+          alt="Warm cozy café atmosphere at Cafe Eleven Eleven" 
+          class="about-main-image"
+          loading="lazy"
+        >
+        <div class="about-accent-badge">
+          <div class="badge-quote">“Good coffee, good mood, great vibes ☕💛”</div>
+          <div class="badge-label">— Customer Review</div>
+        </div>
+      </div>
+
+      <div class="about-content fade-up delay-2">
+        <span class="tagline-badge">Our Story</span>
+        <h2 class="section-title">Your Everyday Escape in Sinnar.</h2>
+        
+        <p class="about-lead">
+          Cafe Eleven:Eleven is a cozy café in Sinnar where good food, comforting coffee and relaxed vibes come together. Whether you're stopping by for a quick coffee, meeting friends or enjoying a casual meal, 11:11 is made for slowing down and enjoying the moment.
+        </p>
+
+        <div class="about-triad">
+          <div class="triad-item"><span class="triad-bullet"></span><span>Good Food</span></div>
+          <div class="triad-item"><span class="triad-bullet"></span><span>Good Coffee</span></div>
+          <div class="triad-item"><span class="triad-bullet"></span><span>Good Vibes</span></div>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">
+          Conveniently situated right in front of IDBI Bank on Devi Road, we pride ourselves on delivering a warm welcome, attentive service, and an enjoyable space where you always feel at home.
+        </p>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#popular" class="btn btn-primary"><span>View Popular Picks</span></a>
+          <a href="#location" class="btn btn-secondary"><span>Find Our Location</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Picks Section -->
+<section class="popular-section" id="popular">
+  <div class="container">
+    <div class="section-header text-center fade-up">
+      <span class="tagline-badge">Curated Favorites</span>
+      <h2 class="section-title">Something You'll Love.</h2>
+      <p class="section-subtitle">A few customer-favorite picks to get you started, celebrated regularly in Google reviews.</p>
+    </div>
+
+    <div class="popular-grid">
+      <!-- 1. Tandoor Paneer Pizza -->
+      <article class="food-card fade-up">
+        <div class="card-media">
+          <img class="provided-photo crop-a" src="assets/cafe-photo-1.jpeg" alt="Fresh café platter at Cafe Eleven:Eleven" loading="lazy">
+          <span class="card-tag">Customer Favorite</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header-row">
+            <h3 class="card-title">Tandoor Paneer Pizza</h3>
+            <span class="card-price">Ask at café</span>
+          </div>
+          <p class="card-desc">Rich, cheesy and packed with paneer and tandoor-inspired flavors on a crisp crust.</p>
+          <div class="card-footer">
+            <span class="card-service-meta">Freshly Baked</span>
+            <a href="#location" class="card-action-link">Order at Cafe &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Momos -->
+      <article class="food-card fade-up delay-1">
+        <div class="card-media">
+          <img class="provided-photo crop-b" src="assets/cafe-photo-7.jpeg" alt="Golden snack bites at Cafe Eleven:Eleven" loading="lazy">
+          <span class="card-tag">Popular Snack</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header-row">
+            <h3 class="card-title">Momos</h3>
+            <span class="card-price">Ask at café</span>
+          </div>
+          <p class="card-desc">Steaming, savory dumplings served with our signature spicy dipping chutney.</p>
+          <div class="card-footer">
+            <span class="card-service-meta">Served Hot</span>
+            <a href="#location" class="card-action-link">Order at Cafe &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Thick Coffee -->
+      <article class="food-card fade-up delay-2">
+        <div class="card-media">
+          <img class="provided-photo crop-c" src="assets/cafe-photo-6.jpeg" alt="Chocolate coffee at Cafe Eleven:Eleven" loading="lazy">
+          <span class="card-tag">House Specialty</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header-row">
+            <h3 class="card-title">Thick Coffee</h3>
+            <span class="card-price">Ask at café</span>
+          </div>
+          <p class="card-desc">Rich, velvety and dense cold coffee blend made for genuine coffee lovers.</p>
+          <div class="card-footer">
+            <span class="card-service-meta">Signature Cold Brew</span>
+            <a href="#location" class="card-action-link">Order at Cafe &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Mocha Coffee -->
+      <article class="food-card fade-up">
+        <div class="card-media">
+          <img class="provided-photo crop-d" src="assets/cafe-photo-2.jpeg" alt="Golden snack bites at Cafe Eleven:Eleven" loading="lazy">
+          <span class="card-tag">Sweet & Rich</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header-row">
+            <h3 class="card-title">Mocha Coffee</h3>
+            <span class="card-price">Ask at café</span>
+          </div>
+          <p class="card-desc">Comforting harmony of deep roasted espresso and luscious chocolate notes.</p>
+          <div class="card-footer">
+            <span class="card-service-meta">Hot or Iced</span>
+            <a href="#location" class="card-action-link">Order at Cafe &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Sandwich -->
+      <article class="food-card fade-up delay-1">
+        <div class="card-media">
+          <img class="provided-photo crop-e" src="assets/cafe-photo-5.jpeg" alt="Fresh café platter at Cafe Eleven:Eleven" loading="lazy">
+          <span class="card-tag">Daily Classic</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header-row">
+            <h3 class="card-title">Sandwich</h3>
+            <span class="card-price">Ask at café</span>
+          </div>
+          <p class="card-desc">Crisply toasted bread filled with fresh vegetables and seasoned spreads.</p>
+          <div class="card-footer">
+            <span class="card-service-meta">Freshly Prepared</span>
+            <a href="#location" class="card-action-link">Order at Cafe &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. Cheese Sandwich -->
+      <article class="food-card fade-up delay-2">
+        <div class="card-media">
+          <img class="provided-photo crop-f" src="assets/cafe-photo-4.jpeg" alt="Fresh café platter at Cafe Eleven:Eleven" loading="lazy">
+          <span class="card-tag">Melted Cheese</span>
+        </div>
+        <div class="card-body">
+          <div class="card-header-row">
+            <h3 class="card-title">Cheese Sandwich</h3>
+            <span class="card-price">Ask at café</span>
+          </div>
+          <p class="card-desc">Golden toasted slices overflowing with gooey melted cheese and seasoning.</p>
+          <div class="card-footer">
+            <span class="card-service-meta">Extra Cheesy</span>
+            <a href="#location" class="card-action-link">Order at Cafe &rarr;</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="text-center fade-up">
+      <a href="#menu" class="btn btn-primary">
+        <span>View Full Menu Layout</span>
+        <svg class="icon btn-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Section -->
+<section class="experience-section">
+  <div class="experience-bg-glow"></div>
+  <div class="container">
+    <div class="experience-header fade-up">
+      <span class="tagline-badge tagline-dark">The 11:11 Experience</span>
+      <h2 class="experience-title">Come for the Coffee.<br>Stay for the Vibes.</h2>
+      <p class="experience-desc">Crafted as a relaxing oasis in Sinnar where you can gather, refuel, and unwind without rushing.</p>
+    </div>
+
+    <div class="experience-grid">
+      <div class="experience-card fade-up">
+        <div class="exp-icon-wrap">☕</div>
+        <h3 class="exp-card-title">Coffee & Comfort</h3>
+        <p class="exp-card-desc">From soothing warm brews to thick indulgent cold coffees, every cup is prepared with care to brighten your mood.</p>
+      </div>
+
+      <div class="experience-card fade-up delay-1">
+        <div class="exp-icon-wrap">🍕</div>
+        <h3 class="exp-card-title">Delicious Food</h3>
+        <p class="exp-card-desc">Savor hearty pizzas, comforting momos, and hot grilled sandwiches packed with flavors.</p>
+      </div>
+
+      <div class="experience-card fade-up delay-2">
+        <div class="exp-icon-wrap">✨</div>
+        <h3 class="exp-card-title">Relaxed Ambience</h3>
+        <p class="exp-card-desc">A comfortable, youthful atmosphere with soothing music where you can enjoy your time at your own pace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dedicated Menu Section -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-header text-center fade-up">
+      <span class="tagline-badge">Menu Preview</span>
+      <h2 class="section-title">Explore Our Offerings</h2>
+      <p class="section-subtitle">Drop by the counter in Sinnar for our complete seasonal list and daily specials.</p>
+    </div>
+
+    <div class="menu-tabs fade-up" id="menuTabs">
+      <button class="menu-tab-btn is-active" data-category="all">All Items</button>
+      <button class="menu-tab-btn" data-category="coffee">Coffee</button>
+      <button class="menu-tab-btn" data-category="pizza">Pizza</button>
+      <button class="menu-tab-btn" data-category="momos">Momos</button>
+      <button class="menu-tab-btn" data-category="sandwiches">Sandwiches</button>
+      <button class="menu-tab-btn" data-category="snacks">Snacks</button>
+    </div>
+
+    <div class="menu-table-container fade-up delay-1">
+      <div class="menu-list" id="menuItemList"></div>
+
+      <div class="menu-notice-box">
+        <div style="font-size:0.875rem; color:var(--text-muted);">
+          Prices are subject to seasonal menu updates. Verified price range: <strong>₹1–200</strong> per person.
+        </div>
+        <a href="#location" class="btn btn-secondary btn-sm">Order At Counter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header text-center fade-up">
+      <span class="tagline-badge">Visual Journal</span>
+      <h2 class="section-title">Moments at 11:11</h2>
+      <p class="section-subtitle">A glimpse into the coffee, food, and cozy moments shared at our Sinnar café.</p>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item fade-up span-2-row" data-index="0" data-caption="Bright daytime seating at Cafe Eleven:Eleven">
+        <img src="assets/cafe-photo-3.jpeg" alt="Bright daytime seating at Cafe Eleven:Eleven" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Daytime Seating</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-1" data-index="1" data-caption="Latte and playful café table details">
+        <img src="assets/cafe-photo-10.jpeg" alt="Latte and playful café table details" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Coffee Moments</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-2" data-index="2" data-caption="Freshly served café bites">
+        <img src="assets/cafe-photo-1.jpeg" alt="Freshly served café bites" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Fresh Bites</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-1" data-index="3" data-caption="Refreshing blue citrus cooler">
+        <img src="assets/cafe-photo-2.jpeg" alt="Refreshing blue citrus cooler" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Cool Refreshments</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-2" data-index="4" data-caption="Chocolate dessert with almond topping">
+        <img src="assets/cafe-photo-4.jpeg" alt="Chocolate dessert with almond topping" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Dessert Moments</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-3" data-index="5" data-caption="Grilled café sandwich">
+        <img src="assets/cafe-photo-5.jpeg" alt="Grilled café sandwich" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Grilled Favorites</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up" data-index="6" data-caption="Chocolate coffee and floral café styling">
+        <img src="assets/cafe-photo-6.jpeg" alt="Chocolate coffee and floral café styling" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Signature Coffee</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-1" data-index="7" data-caption="Golden crispy snack bites">
+        <img src="assets/cafe-photo-7.jpeg" alt="Golden crispy snack bites" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Crispy Bites</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-2" data-index="8" data-caption="Warm evening café interior">
+        <img src="assets/cafe-photo-8.jpeg" alt="Warm evening café interior" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Evening Ambience</div>
+        </div>
+      </div>
+      <div class="gallery-item fade-up delay-3" data-index="9" data-caption="Cozy seating and hanging floral décor">
+        <img src="assets/cafe-photo-9.jpeg" alt="Cozy seating and hanging floral décor" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-view-btn">🔍</div>
+          <div class="gallery-caption">Cozy Corners</div>
+        </div>
+      </div>
+    </div>    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrev">&#10094;</button>
+  <div class="lightbox-content">
+    <img src="" alt="" class="lightbox-img" id="lightboxImg">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+  <button class="lightbox-nav-btn lightbox-next" id="lightboxNext">&#10095;</button>
+</div>
+
+<!-- Reviews Section -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header text-center fade-up">
+      <span class="tagline-badge">Verified Feedback</span>
+      <h2 class="section-title">Loved by Sinnar.</h2>
+      <p class="section-subtitle">Real feedback from local guests enjoying coffee, bites, and welcoming vibes every single day.</p>
+    </div>
+
+    <div class="reviews-score-card fade-up">
+      <div class="score-summary">
+        <div class="score-number">4.8</div>
+        <div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <div class="score-meta-title">4.8 out of 5 Rating</div>
+          <div style="font-size:0.875rem; color:var(--text-muted);">Based on 171 Google Customer Reviews</div>
+        </div>
+      </div>
+
+      <a href="https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <span>See More Reviews on Google</span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      </a>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">“Good ambience and food options at very reasonable prices. The paneer tandoori pizza was amazing and the coffee was also nice.”</p>
+        </div>
+        <div class="review-footer">
+          <div class="review-avatar-pill">G</div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:600; color:var(--espresso-900);">Google Customer Review</div>
+            <div style="font-size:0.75rem; color:var(--text-subtle);">Sinnar Local Guide</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-up delay-1">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">“Good coffee, good mood, great vibes ☕💛”</p>
+        </div>
+        <div class="review-footer">
+          <div class="review-avatar-pill">G</div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:600; color:var(--espresso-900);">Google Customer Review</div>
+            <div style="font-size:0.75rem; color:var(--text-subtle);">Verified Diner</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-up delay-2">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">“Best cafe in town..must visit”</p>
+        </div>
+        <div class="review-footer">
+          <div class="review-avatar-pill">G</div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:600; color:var(--espresso-900);">Google Customer Review</div>
+            <div style="font-size:0.75rem; color:var(--text-subtle);">Local Resident</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location Section -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header text-center fade-up">
+      <span class="tagline-badge">Find Us Easily</span>
+      <h2 class="section-title">Find Your Way to 11:11.</h2>
+      <p class="section-subtitle">Located conveniently in the heart of Sinnar on Devi Road.</p>
+    </div>
+
+    <div class="location-grid">
+      <div class="location-details fade-up">
+        <div class="address-card">
+          <div class="address-row">
+            <div class="loc-icon-circle">📍</div>
+            <div>
+              <div class="loc-heading">Address & Landmark</div>
+              <div class="loc-text">
+                Front of IDBI Bank, Devi Road,<br>
+                Ganesh Society, Sinnar, Maharashtra 422103
+              </div>
+              <div class="loc-code-badge">Google Code: <strong>RXXV+42, Sinnar</strong></div>
+            </div>
+          </div>
+
+          <div class="address-row">
+            <div class="loc-icon-circle">⏰</div>
+            <div>
+              <div class="loc-heading">Current Closing Time</div>
+              <div class="loc-text">Open Daily until <strong>11:00 PM</strong></div>
+              <div class="live-status">
+                <span class="pulse-dot"></span>
+                <span>Open for dine-in, takeaway & delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="address-row">
+            <div class="loc-icon-circle">₹</div>
+            <div>
+              <div class="loc-heading">Price Range & Services</div>
+              <div class="loc-text">₹1–200 per person • Dine-in • Drive-through • Delivery</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <span>Get Directions on Google Maps</span>
+          </a>
+          <button id="copyAddressBtn" class="btn btn-secondary">
+            <span>Copy Address</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="map-container fade-up delay-1">
+        <div class="map-frame-wrapper">
+          <iframe 
+            class="interactive-map-frame"
+            title="Cafe Eleven Eleven Location Map"
+            src="https://maps.google.com/maps?q=Front%20of%20IDBI%20Bank,%20Devi%20Rd,%20Ganesh%20Society,%20Sinnar,%20Maharashtra%20422103&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+            loading="lazy" 
+            allowfullscreen>
+          </iframe>
+          <div class="map-pin-overlay">
+            <div>
+              <strong style="color:var(--espresso-950);">Cafe Eleven:Eleven (11:11)</strong>
+              <div style="font-size:0.8125rem; color:var(--text-muted);">Front of IDBI Bank, Devi Road, Sinnar</div>
+            </div>
+            <a href="https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-caramel">Open in Maps &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section class="cta-banner-section">
+  <div class="container">
+    <div class="cta-banner-card fade-up">
+      <span class="tagline-badge tagline-dark">We're Waiting For You</span>
+      <h2 class="cta-title">Your Table. Your Coffee. Your Time.</h2>
+      <p class="cta-desc">Drop by 11:11 for coffee, food and a little time away from the rush.</p>
+
+      <div class="cta-buttons-wrap">
+        <a href="https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn btn-caramel">
+          <span>Get Directions</span>
+        </a>
+        <a href="#menu" class="btn btn-light-outline">
+          <span>View Menu</span>
+        </a>
+        <a href="ORDERING_URL_HERE" class="btn btn-light" onclick="handleOrderOnlineClick(event)">
+          <span>Order Online</span>
+        </a>
+      </div>
+
+      <div class="services-available-pill">
+        <div class="service-dot-item"><span class="service-dot"></span><span>Dine-in Experience</span></div>
+        <div class="service-dot-item"><span class="service-dot"></span><span>Convenient Drive-through</span></div>
+        <div class="service-dot-item"><span class="service-dot"></span><span>Doorstep Delivery</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-title">11:11</div>
+        <div style="font-weight:700; color:#fff; letter-spacing:0.15em; font-size:0.8125rem; text-transform:uppercase;">CAFE ELEVEN:ELEVEN</div>
+        <div style="font-family:var(--font-marathi); font-size:0.875rem; color:var(--caramel-400); margin-bottom:0.75rem;">कैफे इलेवन:इलेवन (11:11)</div>
+        <p class="footer-tagline">“Good coffee. Great food. Better vibes.”</p>
+        <p style="font-size:0.875rem; color:var(--text-light-muted); line-height:1.6;">
+          Front of IDBI Bank, Devi Road,<br>
+          Ganesh Society, Sinnar, Maharashtra 422103
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links-list">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Our Café</a></li>
+          <li><a href="#popular">Popular Picks</a></li>
+          <li><a href="#menu">Full Menu</a></li>
+          <li><a href="#gallery">Photo Gallery</a></li>
+          <li><a href="#reviews">Customer Reviews</a></li>
+          <li><a href="#location">Find Location</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">At the Café</div>
+        <ul class="footer-links-list">
+          <li>Closing Time: 11:00 PM</li>
+          <li>Price Range: ₹1–200 / person</li>
+          <li>Dine-In: Available</li>
+          <li>Drive-through: Available</li>
+          <li>Delivery: Available</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Connect with Us</div>
+        <p style="font-size:0.875rem; margin-bottom:1.25rem;">Tag us in your stories and stay tuned for daily specials.</p>
+        <div class="social-links-row">
+          <a href="INSTAGRAM_URL_HERE" target="_blank" rel="noopener noreferrer" class="social-icon-btn" onclick="handleSocialClick(event, 'Instagram')">📷</a>
+          <a href="FACEBOOK_URL_HERE" target="_blank" rel="noopener noreferrer" class="social-icon-btn" onclick="handleSocialClick(event, 'Facebook')">📘</a>
+          <a href="https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra" target="_blank" rel="noopener noreferrer" class="social-icon-btn">📍</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Cafe Eleven:Eleven. All rights reserved.</div>
+      <div>Front of IDBI Bank, Devi Road, Sinnar, Maharashtra 422103</div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑</button>
+<div class="toast-msg" id="toastMsg"><span id="toastText">Address copied to clipboard!</span></div>
+
+<!-- ========================================================
+     JAVASCRIPT CONFIG & LOGIC
+     ======================================================== -->
+<script>
+  // ========================================================
+  // CAFE INFORMATION
+  // ========================================================
+  const CAFE_INFO = {
+    name: "Cafe Eleven:Eleven",
+    address: "Front of IDBI Bank, Devi Rd, Ganesh Society, Sinnar, Maharashtra 422103",
+    googlePlusCode: "RXXV+42, Sinnar, Maharashtra",
+    phoneNumber: "PHONE_NUMBER_HERE",
+    googleMapsUrl: "https://maps.google.com/?q=RXXV%2B42+Sinnar+Maharashtra",
+    orderingUrl: "ORDERING_URL_HERE",
+    instagramUrl: "INSTAGRAM_URL_HERE",
+    facebookUrl: "FACEBOOK_URL_HERE"
+  };
+
+  // ========================================================
+  // REAL CAFE IMAGES CONFIGURATION
+  // ========================================================
+  const CAFE_IMAGES = {
+    hero: "assets/cafe-photo-8.jpeg",
+    about: "assets/cafe-photo-9.jpeg",
+    pizza: "assets/cafe-photo-1.jpeg",
+    momos: "assets/cafe-photo-7.jpeg",
+    coffee: "assets/cafe-photo-6.jpeg",
+    mocha: "assets/cafe-photo-2.jpeg",
+    sandwich: "assets/cafe-photo-5.jpeg",
+    cheeseSandwich: "assets/cafe-photo-4.jpeg",
+    gallery: [
+      "assets/cafe-photo-3.jpeg",
+      "assets/cafe-photo-10.jpeg",
+      "assets/cafe-photo-1.jpeg",
+      "assets/cafe-photo-2.jpeg",
+      "assets/cafe-photo-7.jpeg",
+      "assets/cafe-photo-6.jpeg"
+    ]
+  };
+
+  function resolveImg(url) {
+    return url;
+  }
+
+  const IMAGE_CONFIG = {
+    hero: CAFE_IMAGES.hero,
+    about: CAFE_IMAGES.about,
+    popular: {
+      tandoorPaneerPizza: CAFE_IMAGES.pizza,
+      momos: CAFE_IMAGES.momos,
+      thickCoffee: CAFE_IMAGES.coffee,
+      mochaCoffee: CAFE_IMAGES.mocha,
+      sandwich: CAFE_IMAGES.sandwich,
+      cheeseSandwich: CAFE_IMAGES.cheeseSandwich
+    },
+    gallery: [
+      { url: "assets/cafe-photo-3.jpeg", caption: "Bright daytime seating at Cafe Eleven:Eleven" },
+      { url: "assets/cafe-photo-10.jpeg", caption: "Latte and playful café table details" },
+      { url: "assets/cafe-photo-1.jpeg", caption: "Freshly served café bites" },
+      { url: "assets/cafe-photo-2.jpeg", caption: "Refreshing blue citrus cooler" },
+      { url: "assets/cafe-photo-4.jpeg", caption: "Chocolate dessert with almond topping" },
+      { url: "assets/cafe-photo-5.jpeg", caption: "Grilled café sandwich" },
+      { url: "assets/cafe-photo-6.jpeg", caption: "Chocolate coffee and floral café styling" },
+      { url: "assets/cafe-photo-7.jpeg", caption: "Golden crispy snack bites" },
+      { url: "assets/cafe-photo-8.jpeg", caption: "Warm evening café interior" },
+      { url: "assets/cafe-photo-9.jpeg", caption: "Cozy seating and hanging floral décor" }
+    ]
+  };
+  };
+
+  const MENU_DATABASE = [
+    { category: "pizza", name: "Tandoor Paneer Pizza", description: "Rich, cheesy and packed with paneer and tandoor-inspired flavors.", price: "Ask at café", isPopular: true },
+    { category: "pizza", name: "Classic Cheese Pizza", description: "Traditional mozzarella blend on our signature herb crust.", price: "Ask at café", isPopular: false },
+    { category: "momos", name: "Steamed Momos", description: "Soft dumplings served with signature house spicy dip.", price: "Ask at café", isPopular: true },
+    { category: "momos", name: "Fried / Crispy Momos", description: "Golden fried dumplings with a delightful outer crunch.", price: "Ask at café", isPopular: false },
+    { category: "coffee", name: "Thick Coffee", description: "Rich, creamy and extra dense cold coffee blend.", price: "Ask at café", isPopular: true },
+    { category: "coffee", name: "Mocha Coffee", description: "Velvety espresso harmonized with dark chocolate.", price: "Ask at café", isPopular: true },
+    { category: "coffee", name: "Hot Brew Coffee", description: "Freshly brewed comforting coffee to elevate your mood.", price: "Ask at café", isPopular: false },
+    { category: "sandwiches", name: "Cheese Sandwich", description: "Golden toasted sandwich filled with luscious melted cheese.", price: "Ask at café", isPopular: true },
+    { category: "sandwiches", name: "Veg Grilled Sandwich", description: "Crispy grilled bread packed with vegetables and chutney.", price: "Ask at café", isPopular: true },
+    { category: "snacks", name: "Café Quick Bites", description: "Freshly prepared snacks to accompany your favorite brew.", price: "Ask at café", isPopular: false }
+  ];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderMenuItems("all");
+
+    const menuTabs = document.querySelectorAll(".menu-tab-btn");
+    menuTabs.forEach(btn => {
+      btn.addEventListener("click", () => {
+        menuTabs.forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        renderMenuItems(btn.getAttribute("data-category"));
+      });
+    });
+
+    const siteHeader = document.getElementById("siteHeader");
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollY > 50) siteHeader.classList.add("scrolled");
+      else siteHeader.classList.remove("scrolled");
+
+      if (scrollY > 400) backToTop.classList.add("is-visible");
+      else backToTop.classList.remove("is-visible");
+    }, { passive: true });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileNav = document.getElementById("mobileNav");
+    const mobileNavBackdrop = document.getElementById("mobileNavBackdrop");
+
+    function openMobileMenu() {
+      menuToggle.classList.add("is-active");
+      mobileNav.classList.add("is-open");
+      mobileNavBackdrop.classList.add("is-open");
+    }
+
+    function closeMobileMenu() {
+      menuToggle.classList.remove("is-active");
+      mobileNav.classList.remove("is-open");
+      mobileNavBackdrop.classList.remove("is-open");
+    }
+
+    menuToggle.addEventListener("click", () => {
+      if (mobileNav.classList.contains("is-open")) closeMobileMenu();
+      else openMobileMenu();
+    });
+
+    mobileNavBackdrop.addEventListener("click", closeMobileMenu);
+    document.querySelectorAll("[data-nav-link]").forEach(l => l.addEventListener("click", closeMobileMenu));
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          const offsetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - 76;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-inview");
+          entry.target.querySelectorAll(".counter").forEach(counter => {
+            const target = parseFloat(counter.getAttribute("data-target"));
+            let curr = 0;
+            const step = target / 30;
+            const timer = setInterval(() => {
+              curr += step;
+              if (curr >= target) { curr = target; clearInterval(timer); }
+              counter.innerText = (target % 1 !== 0) ? curr.toFixed(1) : Math.floor(curr);
+            }, 30);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+    const copyBtn = document.getElementById("copyAddressBtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText("Cafe Eleven:Eleven, Front of IDBI Bank, Devi Rd, Sinnar, Maharashtra 422103").then(() => {
+          showToast("Address copied to clipboard!");
+        });
+      });
+    }
+
+    setupLightbox();
+  });
+
+  function renderMenuItems(category) {
+    const container = document.getElementById("menuItemList");
+    if (!container) return;
+    const filtered = category === "all" ? MENU_DATABASE : MENU_DATABASE.filter(i => i.category === category);
+    let html = "";
+    filtered.forEach(item => {
+      html += `
+        <div class="menu-item-row">
+          <div class="item-meta">
+            <div class="item-name-wrap">
+              <span class="item-name">${item.name}</span>
+              ${item.isPopular ? '<span class="item-badge-popular">Popular Pick</span>' : ''}
+            </div>
+            <p class="item-desc">${item.description}</p>
+          </div>
+          <div class="item-price">${item.price}</div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  function setupLightbox() {
+    const modal = document.getElementById("lightboxModal");
+    const img = document.getElementById("lightboxImg");
+    const caption = document.getElementById("lightboxCaption");
+    let currentIdx = 0;
+
+    function showImg(idx) {
+      if (idx < 0) idx = IMAGE_CONFIG.gallery.length - 1;
+      if (idx >= IMAGE_CONFIG.gallery.length) idx = 0;
+      currentIdx = idx;
+      img.src = IMAGE_CONFIG.gallery[currentIdx].url;
+      caption.innerText = IMAGE_CONFIG.gallery[currentIdx].caption;
+    }
+
+    document.querySelectorAll(".gallery-item").forEach(item => {
+      item.addEventListener("click", () => {
+        showImg(parseInt(item.getAttribute("data-index"), 10) || 0);
+        modal.classList.add("is-active");
+      });
+    });
+
+    document.getElementById("lightboxClose").addEventListener("click", () => modal.classList.remove("is-active"));
+    document.getElementById("lightboxPrev").addEventListener("click", () => showImg(currentIdx - 1));
+    document.getElementById("lightboxNext").addEventListener("click", () => showImg(currentIdx + 1));
+    modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("is-active"); });
+    document.addEventListener("keydown", e => {
+      if (!modal.classList.contains("is-active")) return;
+      if (e.key === "Escape") modal.classList.remove("is-active");
+      if (e.key === "ArrowLeft") showImg(currentIdx - 1);
+      if (e.key === "ArrowRight") showImg(currentIdx + 1);
+    });
+  }
+
+  function showToast(text) {
+    const toast = document.getElementById("toastMsg");
+    const toastText = document.getElementById("toastText");
+    if (!toast || !toastText) return;
+    toastText.innerText = text;
+    toast.classList.add("is-show");
+    setTimeout(() => toast.classList.remove("is-show"), 3200);
+  }
+
+  function handleOrderOnlineClick(e) {
+    if (CAFE_INFO.orderingUrl === "ORDERING_URL_HERE") {
+      e.preventDefault();
+      showToast("Online ordering coming soon! Please visit us or call directly.");
+    }
+  }
+
+  function handleSocialClick(e, network) {
+    const url = network === 'Instagram' ? CAFE_INFO.instagramUrl : CAFE_INFO.facebookUrl;
+    if (url.includes("_HERE")) {
+      e.preventDefault();
+      showToast(`${network} link will be connected soon!`);
+    }
+  }
+</script>
+<style>
+  .provided-photo { object-fit: cover !important; }
+  .crop-a { object-position: 50% 20% !important; }
+  .crop-b { object-position: 25% 35% !important; }
+  .crop-c { object-position: 75% 35% !important; }
+  .crop-d { object-position: 35% 65% !important; }
+  .crop-e { object-position: 65% 65% !important; }
+  .crop-f { object-position: 50% 82% !important; }
+</style>
