@@ -1,0 +1,3842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17120f">
+
+<title>EMBER & BEAN — Specialty Café</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+:root{
+  --dark:#17120f;
+  --dark-2:#211914;
+  --cream:#f7f0e6;
+  --cream-2:#eee2d1;
+  --coffee:#8b5e3c;
+  --gold:#c79a62;
+  --white:#ffffff;
+  --text:#2b211c;
+  --muted:#75685f;
+  --border:rgba(43,33,28,.12);
+  --radius:24px;
+  --shadow:0 20px 60px rgba(40,25,15,.14);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  overflow-x:hidden;
+  font-family:"DM Sans",Arial,sans-serif;
+  color:var(--text);
+  background:var(--cream);
+}
+
+img{
+  display:block;
+  width:100%;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+.container{
+  width:min(1180px,92%);
+  margin:0 auto;
+}
+
+section{
+  position:relative;
+  padding:105px 0;
+}
+
+.section-head{
+  max-width:700px;
+  margin-bottom:55px;
+}
+
+.section-head.center{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:18px;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.eyebrow:before{
+  content:"";
+  width:32px;
+  height:1px;
+  background:var(--gold);
+}
+
+.section-title{
+  margin-bottom:18px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(38px,5vw,62px);
+  line-height:1.05;
+  letter-spacing:-1px;
+}
+
+.section-title span{
+  color:var(--coffee);
+  font-style:italic;
+}
+
+.section-text{
+  color:var(--muted);
+  line-height:1.8;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:9999;
+  width:100%;
+  padding:22px 0;
+  transition:.35s ease;
+}
+
+.navbar.scrolled{
+  padding:13px 0;
+  background:rgba(23,18,15,.95);
+  backdrop-filter:blur(18px);
+  box-shadow:0 8px 30px rgba(0,0,0,.18);
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  color:#fff;
+  font-family:"Playfair Display",serif;
+  font-size:27px;
+  font-weight:700;
+}
+
+.logo span{
+  color:var(--gold);
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:27px;
+  list-style:none;
+  color:#fff;
+  font-size:14px;
+}
+
+.nav-links a{
+  opacity:.9;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:var(--gold);
+}
+
+.nav-btn{
+  padding:12px 19px;
+  border-radius:100px;
+  background:var(--gold);
+  color:#fff!important;
+  font-weight:700;
+  opacity:1!important;
+}
+
+.menu-toggle{
+  display:none;
+  border:0;
+  background:none;
+  color:#fff;
+  font-size:27px;
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  color:#fff;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(13,9,7,.86),
+      rgba(13,9,7,.45),
+      rgba(13,9,7,.2)
+    ),
+    url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=2000&q=90")
+    center/cover;
+}
+
+.hero-content{
+  max-width:720px;
+  padding-top:70px;
+  animation:heroIn 1s ease both;
+}
+
+.hero h1{
+  margin-bottom:25px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(55px,8vw,100px);
+  line-height:.95;
+  letter-spacing:-3px;
+}
+
+.hero h1 span{
+  color:var(--gold);
+  font-style:italic;
+}
+
+.hero p{
+  max-width:570px;
+  margin-bottom:35px;
+  color:rgba(255,255,255,.82);
+  line-height:1.8;
+  font-size:17px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:15px 24px;
+  border-radius:100px;
+  border:1px solid transparent;
+  cursor:pointer;
+  font-weight:700;
+  transition:.3s;
+}
+
+.btn-primary{
+  background:var(--gold);
+  color:#fff;
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(199,154,98,.35);
+}
+
+.btn-outline{
+  border-color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  backdrop-filter:blur(8px);
+}
+
+.btn-outline:hover{
+  background:#fff;
+  color:var(--dark);
+}
+
+.hero-info{
+  position:absolute;
+  bottom:30px;
+  width:100%;
+}
+
+.hero-info-inner{
+  display:flex;
+  justify-content:space-between;
+  color:#fff;
+  font-size:13px;
+}
+
+.hero-info span{
+  opacity:.75;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+  background:#fffaf4;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.about-images{
+  position:relative;
+  min-height:560px;
+}
+
+.about-main{
+  height:500px;
+  overflow:hidden;
+  border-radius:25px;
+}
+
+.about-main img{
+  height:100%;
+  object-fit:cover;
+}
+
+.about-small{
+  position:absolute;
+  right:-20px;
+  bottom:0;
+  width:210px;
+  height:260px;
+  overflow:hidden;
+  border:9px solid #fffaf4;
+  border-radius:22px;
+}
+
+.about-small img{
+  height:100%;
+  object-fit:cover;
+}
+
+.about-badge{
+  position:absolute;
+  top:30px;
+  left:-25px;
+  padding:18px 22px;
+  border-radius:15px;
+  background:var(--dark);
+  color:#fff;
+  box-shadow:var(--shadow);
+}
+
+.about-badge strong{
+  display:block;
+  color:var(--gold);
+  font-family:"Playfair Display",serif;
+  font-size:28px;
+}
+
+.about-list{
+  margin:28px 0;
+  list-style:none;
+}
+
+.about-list li{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:13px;
+}
+
+.about-list li:before{
+  content:"✓";
+  display:grid;
+  width:24px;
+  height:24px;
+  place-items:center;
+  border-radius:50%;
+  background:var(--cream-2);
+  color:var(--coffee);
+  font-weight:700;
+}
+
+
+/* =========================================================
+   ⭐ NEW 3D CAFÉ MENU WHEEL
+========================================================= */
+
+.signature-wheel{
+  padding:0;
+  background:#17120f;
+  color:#fff;
+  overflow:hidden;
+}
+
+.wheel-wrapper{
+  position:relative;
+  width:100%;
+  height:760px;
+  overflow:hidden;
+}
+
+.wheel-header{
+  position:absolute;
+  top:55px;
+  left:6%;
+  z-index:20;
+  pointer-events:none;
+}
+
+.wheel-header .eyebrow{
+  color:var(--gold);
+}
+
+.wheel-header h2{
+  max-width:500px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(42px,5vw,68px);
+  line-height:1;
+}
+
+.wheel-header h2 span{
+  color:var(--gold);
+  font-style:italic;
+}
+
+.wheel-instruction{
+  position:absolute;
+  right:6%;
+  bottom:45px;
+  z-index:30;
+  color:rgba(255,255,255,.48);
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+
+/* Main 3D stage */
+
+.cafe-wheel-stage{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  cursor:grab;
+  touch-action:pan-x;
+  outline:none;
+  perspective:900px;
+}
+
+.cafe-wheel-stage:active{
+  cursor:grabbing;
+}
+
+.cafe-wheel{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+
+/* Food cards */
+
+.cafe-wheel-card{
+  position:absolute;
+  top:0;
+  left:0;
+  overflow:visible;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  will-change:transform,opacity;
+}
+
+.cafe-wheel-card-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:22px;
+  background:#29201b;
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
+  transform-origin:center;
+  will-change:transform;
+}
+
+.cafe-wheel-card-inner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+.cafe-wheel-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.82),
+      rgba(0,0,0,.08) 65%
+    );
+}
+
+.cafe-wheel-card-content{
+  position:absolute;
+  right:0;
+  bottom:0;
+  left:0;
+  padding:25px;
+}
+
+.cafe-wheel-card-content small{
+  display:block;
+  margin-bottom:7px;
+  color:var(--gold);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.cafe-wheel-card-content h3{
+  margin-bottom:5px;
+  font-family:"Playfair Display",serif;
+  font-size:27px;
+}
+
+.cafe-wheel-card-content strong{
+  color:#fff;
+  font-size:16px;
+}
+
+/* Center title */
+
+.wheel-center-label{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:grid;
+  place-items:center;
+  color:rgba(255,255,255,.9);
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  pointer-events:none;
+  transition:opacity .1s;
+}
+
+.wheel-active-title{
+  position:absolute;
+  top:50%;
+  left:7%;
+  z-index:20;
+  transform:translateY(-50%);
+  max-width:300px;
+  opacity:0;
+  pointer-events:none;
+}
+
+.wheel-active-title small{
+  display:block;
+  margin-bottom:8px;
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.wheel-active-title h3{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  line-height:1;
+}
+
+.wheel-active-title p{
+  margin-top:12px;
+  color:rgba(255,255,255,.55);
+  line-height:1.6;
+  font-size:13px;
+}
+
+/* Right side menu index */
+
+.wheel-index{
+  position:absolute;
+  top:50%;
+  right:4%;
+  z-index:30;
+  width:180px;
+  transform:translateY(-50%);
+  list-style:none;
+  text-align:right;
+}
+
+.wheel-index button{
+  display:block;
+  width:100%;
+  padding:4px 0;
+  border:0;
+  background:none;
+  color:rgba(255,255,255,.35);
+  cursor:pointer;
+  text-align:right;
+  font-size:11px;
+  transition:.25s;
+}
+
+.wheel-index button:hover{
+  color:#fff;
+}
+
+.wheel-index button.active{
+  color:var(--gold);
+  font-weight:700;
+}
+
+.wheel-index button.active:before{
+  content:"→ ";
+}
+
+
+/* =========================================================
+   EXPERIENCE
+========================================================= */
+
+.experience{
+  background:#fffaf4;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.feature{
+  padding:32px 25px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:#fff;
+  transition:.3s;
+}
+
+.feature:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow);
+}
+
+.feature-icon{
+  margin-bottom:25px;
+  font-size:35px;
+}
+
+.feature h3{
+  margin-bottom:10px;
+  font-family:"Playfair Display",serif;
+  font-size:23px;
+}
+
+.feature p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   FULL MENU
+========================================================= */
+
+.full-menu{
+  background:var(--cream);
+}
+
+.menu-tabs{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:40px;
+}
+
+.menu-tab{
+  padding:11px 19px;
+  border:1px solid var(--border);
+  border-radius:100px;
+  background:#fff;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.menu-tab.active,
+.menu-tab:hover{
+  background:var(--dark);
+  color:#fff;
+}
+
+.menu-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:17px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#fff;
+  transition:.25s;
+}
+
+.menu-item:hover{
+  transform:translateX(4px);
+  box-shadow:0 8px 25px rgba(40,20,10,.07);
+}
+
+.menu-item img{
+  flex:none;
+  width:90px;
+  height:90px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+.menu-item-info{
+  flex:1;
+}
+
+.menu-item-name{
+  margin-bottom:5px;
+  font-family:"Playfair Display",serif;
+  font-size:20px;
+}
+
+.menu-item-desc{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.menu-price{
+  color:var(--coffee);
+  font-weight:800;
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery{
+  background:#fffaf4;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:220px;
+  gap:14px;
+}
+
+.gallery-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+}
+
+.gallery-item:nth-child(1){
+  grid-row:span 2;
+}
+
+.gallery-item:nth-child(4){
+  grid-column:span 2;
+}
+
+.gallery-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.gallery-item:hover img{
+  transform:scale(1.07);
+}
+
+
+/* =========================================================
+   REVIEWS
+========================================================= */
+
+.reviews{
+  background:#fff;
+}
+
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.review{
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:var(--cream);
+}
+
+.stars{
+  margin-bottom:20px;
+  color:#c49354;
+  letter-spacing:3px;
+}
+
+.review p{
+  margin-bottom:25px;
+  color:#665950;
+  line-height:1.8;
+}
+
+.reviewer{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.avatar{
+  display:grid;
+  width:44px;
+  height:44px;
+  place-items:center;
+  border-radius:50%;
+  background:var(--dark);
+  color:#fff;
+  font-weight:700;
+}
+
+
+/* =========================================================
+   RESERVATION
+========================================================= */
+
+.reservation{
+  background:var(--dark);
+  color:#fff;
+}
+
+.reservation-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:70px;
+  align-items:center;
+}
+
+.reservation .section-text{
+  color:#bcb0a8;
+}
+
+.booking-form{
+  padding:32px;
+  border-radius:25px;
+  background:#fff;
+  color:var(--text);
+  box-shadow:var(--shadow);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:7px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:13px 15px;
+  border:1px solid #ddd3c8;
+  border-radius:12px;
+  outline:none;
+  background:#fffaf4;
+}
+
+.form-group textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location{
+  background:#fffaf4;
+}
+
+.location-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.map-box{
+  min-height:430px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:25px;
+  background:
+    linear-gradient(rgba(30,20,15,.25),rgba(30,20,15,.25)),
+    url("https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=1400&q=80")
+    center/cover;
+}
+
+.map-button{
+  padding:15px 22px;
+  border-radius:100px;
+  background:#fff;
+  font-weight:700;
+  box-shadow:var(--shadow);
+}
+
+.contact-card{
+  padding:40px;
+  border-radius:25px;
+  background:#fff;
+}
+
+.contact-row{
+  display:flex;
+  gap:17px;
+  margin-bottom:28px;
+}
+
+.contact-icon{
+  display:grid;
+  flex:none;
+  width:45px;
+  height:45px;
+  place-items:center;
+  border-radius:13px;
+  background:var(--cream-2);
+}
+
+.contact-row h4{
+  margin-bottom:5px;
+}
+
+.contact-row p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq{
+  background:var(--cream);
+}
+
+.faq-list{
+  max-width:850px;
+  margin:auto;
+}
+
+.faq-item{
+  border-bottom:1px solid var(--border);
+}
+
+.faq-question{
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+  align-items:center;
+  padding:23px 0;
+  border:0;
+  background:none;
+  cursor:pointer;
+  color:var(--text);
+  text-align:left;
+  font-weight:700;
+}
+
+.faq-question span:last-child{
+  font-size:24px;
+  transition:.3s;
+}
+
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:.35s ease;
+}
+
+.faq-answer p{
+  padding:0 0 22px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.faq-item.open .faq-answer{
+  max-height:200px;
+}
+
+.faq-item.open .faq-question span:last-child{
+  transform:rotate(45deg);
+}
+
+
+/* =========================================================
+   INSTAGRAM
+========================================================= */
+
+.instagram{
+  background:#fff;
+}
+
+.instagram-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.instagram-grid a{
+  height:220px;
+  overflow:hidden;
+  border-radius:15px;
+}
+
+.instagram-grid img{
+  height:100%;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.instagram-grid a:hover img{
+  transform:scale(1.08);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  padding:70px 0 25px;
+  background:#110d0b;
+  color:#fff;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:50px;
+  padding-bottom:55px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.footer-logo{
+  margin-bottom:15px;
+  font-family:"Playfair Display",serif;
+  font-size:30px;
+}
+
+.footer-logo span{
+  color:var(--gold);
+}
+
+.footer-description{
+  max-width:330px;
+  color:#9c9088;
+  line-height:1.8;
+}
+
+footer h4{
+  margin-bottom:20px;
+}
+
+.footer-links{
+  list-style:none;
+}
+
+.footer-links li{
+  margin-bottom:12px;
+  color:#a99d94;
+  font-size:14px;
+}
+
+.footer-links a:hover{
+  color:var(--gold);
+}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding-top:25px;
+  color:#756b65;
+  font-size:13px;
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+.whatsapp{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:9999;
+  display:grid;
+  width:58px;
+  height:58px;
+  place-items:center;
+  border-radius:50%;
+  background:#25d366;
+  color:#fff;
+  font-size:25px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  transition:.3s;
+}
+
+.whatsapp:hover{
+  transform:scale(1.08);
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:950px){
+
+  .nav-links{
+    position:absolute;
+    top:72px;
+    left:4%;
+    display:none;
+    width:92%;
+    padding:25px;
+    flex-direction:column;
+    align-items:flex-start;
+    border-radius:18px;
+    background:rgba(23,18,15,.98);
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-btn{
+    display:none;
+  }
+
+  .about-grid,
+  .reservation-grid,
+  .location-grid{
+    grid-template-columns:1fr;
+  }
+
+  .features{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .review-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .menu-list{
+    grid-template-columns:1fr;
+  }
+
+  .wheel-wrapper{
+    height:700px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+  section{
+    padding:75px 0;
+  }
+
+  .container{
+    width:90%;
+  }
+
+  .hero{
+    min-height:760px;
+  }
+
+  .hero h1{
+    font-size:54px;
+    letter-spacing:-2px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .hero-info{
+    display:none;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .about-images{
+    min-height:440px;
+  }
+
+  .about-main{
+    height:390px;
+  }
+
+  .about-small{
+    right:-5px;
+    width:145px;
+    height:185px;
+  }
+
+  .about-badge{
+    left:-8px;
+  }
+
+  .features,
+  .review-grid,
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* MOBILE 3D WHEEL */
+
+  .wheel-wrapper{
+    height:650px;
+  }
+
+  .wheel-header{
+    top:35px;
+    left:7%;
+  }
+
+  .wheel-header h2{
+    max-width:280px;
+    font-size:40px;
+  }
+
+  .wheel-index{
+    top:auto;
+    right:7%;
+    bottom:30px;
+    width:auto;
+    transform:none;
+  }
+
+  .wheel-index button{
+    display:none;
+  }
+
+  .wheel-index button.active{
+    display:block;
+    color:var(--gold);
+  }
+
+  .wheel-center-label{
+    font-size:27px;
+  }
+
+  .wheel-active-title{
+    top:auto;
+    left:7%;
+    bottom:35px;
+    transform:none;
+    max-width:210px;
+  }
+
+  .wheel-active-title h3{
+    font-size:27px;
+  }
+
+  .wheel-active-title p{
+    display:none;
+  }
+
+  .wheel-instruction{
+    right:7%;
+    bottom:90px;
+    font-size:9px;
+  }
+
+  .menu-list{
+    grid-template-columns:1fr;
+  }
+
+  .gallery-grid{
+    grid-template-columns:1fr 1fr;
+    grid-auto-rows:180px;
+  }
+
+  .gallery-item:nth-child(1){
+    grid-row:span 1;
+  }
+
+  .gallery-item:nth-child(4){
+    grid-column:span 1;
+  }
+
+  .instagram-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .instagram-grid a{
+    height:180px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .booking-form{
+    padding:22px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="navbar" id="navbar">
+
+  <div class="container nav-inner">
+
+    <a href="#home" class="logo">
+      EMBER<span>&</span>BEAN
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open menu">
+      ☰
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+
+      <li><a href="#home">Home</a></li>
+
+      <li><a href="#about">About</a></li>
+
+      <li><a href="#signature">Signature</a></li>
+
+      <li><a href="#menu">Menu</a></li>
+
+      <li><a href="#gallery">Gallery</a></li>
+
+      <li><a href="#contact">Contact</a></li>
+
+      <li>
+        <a href="#reservation" class="nav-btn">
+          Book a Table
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+  <div class="container">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Specialty Coffee · Fresh Food
+      </div>
+
+      <h1>
+        Slow mornings.<br>
+        <span>Good coffee.</span>
+      </h1>
+
+      <p>
+        A warm neighbourhood café where exceptional coffee,
+        fresh food and beautiful moments come together.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#signature" class="btn btn-primary">
+          Explore Signature Menu →
+        </a>
+
+        <a href="#reservation" class="btn btn-outline">
+          Reserve a Table
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hero-info">
+
+    <div class="container hero-info-inner">
+
+      <span>📍 Downtown · Your City</span>
+
+      <span>
+        Open Daily · 8:00 AM — 10:30 PM
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section class="about" id="about">
+
+  <div class="container about-grid">
+
+    <div class="about-images reveal">
+
+      <div class="about-main">
+
+        <img
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85"
+          alt="Beautiful cafe interior">
+
+      </div>
+
+      <div class="about-small">
+
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=85"
+          alt="Fresh coffee">
+
+      </div>
+
+      <div class="about-badge">
+
+        <strong>2018</strong>
+
+        Brewing memories since
+
+      </div>
+
+    </div>
+
+
+    <div class="reveal">
+
+      <div class="eyebrow">
+        Our Story
+      </div>
+
+      <h2 class="section-title">
+        More than coffee.<br>
+        <span>A place to belong.</span>
+      </h2>
+
+      <p class="section-text">
+        EMBER & BEAN was created with one simple idea:
+        great coffee tastes even better when shared in a beautiful
+        place with good people.
+      </p>
+
+      <p
+        class="section-text"
+        style="margin-top:15px;">
+        From carefully selected beans to freshly prepared food,
+        every detail is designed to make your visit memorable.
+      </p>
+
+      <ul class="about-list">
+
+        <li>Freshly roasted specialty coffee</li>
+
+        <li>Locally sourced ingredients</li>
+
+        <li>Comfortable work & social spaces</li>
+
+        <li>Warm hospitality, every day</li>
+
+      </ul>
+
+      <a href="#contact" class="btn btn-primary">
+        Visit Our Café →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     ⭐ 3D SIGNATURE MENU WHEEL
+========================================================= -->
+
+<section class="signature-wheel" id="signature">
+
+  <div class="wheel-wrapper">
+
+    <div class="wheel-header">
+
+      <div class="eyebrow">
+        Signature Menu
+      </div>
+
+      <h2>
+        Turn through our<br>
+        <span>favourites.</span>
+      </h2>
+
+    </div>
+
+
+    <div
+      class="cafe-wheel-stage"
+      id="cafeWheelStage"
+      tabindex="0"
+      role="listbox"
+      aria-label="Signature café menu">
+
+      <div
+        class="cafe-wheel"
+        id="cafeWheel">
+      </div>
+
+    </div>
+
+
+    <div
+      class="wheel-center-label"
+      id="wheelCenterLabel">
+      Signature
+    </div>
+
+
+    <div
+      class="wheel-active-title"
+      id="wheelActiveTitle">
+
+      <small>
+        Featured Dish
+      </small>
+
+      <h3 id="activeDishName">
+        Cappuccino
+      </h3>
+
+      <p id="activeDishDescription">
+        Smooth espresso with silky steamed milk.
+      </p>
+
+    </div>
+
+
+    <ol
+      class="wheel-index"
+      id="wheelIndex">
+    </ol>
+
+
+    <div class="wheel-instruction">
+      Scroll · Drag · Swipe · ↑ ↓
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     EXPERIENCE
+========================================================= -->
+
+<section class="experience">
+
+  <div class="container">
+
+    <div class="section-head center reveal">
+
+      <div class="eyebrow">
+        The Experience
+      </div>
+
+      <h2 class="section-title">
+        Made for your <span>everyday moments.</span>
+      </h2>
+
+      <p class="section-text">
+        Whether you're catching up with friends, getting some work done,
+        or simply enjoying your morning coffee, we've created a space
+        you'll want to return to.
+      </p>
+
+    </div>
+
+
+    <div class="features">
+
+      <div class="feature reveal">
+
+        <div class="feature-icon">
+          ☕
+        </div>
+
+        <h3>
+          Specialty Coffee
+        </h3>
+
+        <p>
+          Carefully selected beans, expertly roasted and freshly brewed.
+        </p>
+
+      </div>
+
+
+      <div class="feature reveal">
+
+        <div class="feature-icon">
+          🥐
+        </div>
+
+        <h3>
+          Freshly Made
+        </h3>
+
+        <p>
+          Delicious food prepared with quality ingredients throughout the day.
+        </p>
+
+      </div>
+
+
+      <div class="feature reveal">
+
+        <div class="feature-icon">
+          🛋️
+        </div>
+
+        <h3>
+          Beautiful Space
+        </h3>
+
+        <p>
+          A comfortable atmosphere for conversations, creativity and work.
+        </p>
+
+      </div>
+
+
+      <div class="feature reveal">
+
+        <div class="feature-icon">
+          ✨
+        </div>
+
+        <h3>
+          Warm Service
+        </h3>
+
+        <p>
+          Friendly hospitality that makes every visit feel personal.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FULL MENU
+========================================================= -->
+
+<section class="full-menu" id="menu">
+
+  <div class="container">
+
+    <div class="section-head center reveal">
+
+      <div class="eyebrow">
+        Our Menu
+      </div>
+
+      <h2 class="section-title">
+        Something for <span>everyone.</span>
+      </h2>
+
+      <p class="section-text">
+        From your first coffee of the morning to your last dessert of the evening.
+      </p>
+
+    </div>
+
+
+    <div class="menu-tabs">
+
+      <button class="menu-tab active" data-category="all">
+        All
+      </button>
+
+      <button class="menu-tab" data-category="coffee">
+        Coffee
+      </button>
+
+      <button class="menu-tab" data-category="breakfast">
+        Breakfast
+      </button>
+
+      <button class="menu-tab" data-category="mains">
+        Mains
+      </button>
+
+      <button class="menu-tab" data-category="dessert">
+        Desserts
+      </button>
+
+      <button class="menu-tab" data-category="drinks">
+        Drinks
+      </button>
+
+    </div>
+
+
+    <div class="menu-list">
+
+      <div class="menu-item" data-category="coffee">
+
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80"
+          alt="Cappuccino">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Cappuccino
+          </h3>
+
+          <p class="menu-item-desc">
+            Espresso with silky steamed milk.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹180
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="coffee">
+
+        <img
+          src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80"
+          alt="Cafe Latte">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Café Latte
+          </h3>
+
+          <p class="menu-item-desc">
+            Smooth espresso with creamy milk.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹190
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="breakfast">
+
+        <img
+          src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=300&q=80"
+          alt="Avocado Toast">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Avocado Toast
+          </h3>
+
+          <p class="menu-item-desc">
+            Sourdough, avocado, herbs and seeds.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹320
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="breakfast">
+
+        <img
+          src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=300&q=80"
+          alt="Pancakes">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Pancake Stack
+          </h3>
+
+          <p class="menu-item-desc">
+            Fluffy pancakes with berries and maple.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹290
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="mains">
+
+        <img
+          src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=300&q=80"
+          alt="Garden Bowl">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Garden Bowl
+          </h3>
+
+          <p class="menu-item-desc">
+            Fresh vegetables, grains and house dressing.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹340
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="mains">
+
+        <img
+          src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=300&q=80"
+          alt="Creamy Pasta">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Creamy Pasta
+          </h3>
+
+          <p class="menu-item-desc">
+            House pasta in a creamy herb sauce.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹380
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="dessert">
+
+        <img
+          src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=300&q=80"
+          alt="Chocolate Tart">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Chocolate Tart
+          </h3>
+
+          <p class="menu-item-desc">
+            Dark chocolate with fresh cream.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹220
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="dessert">
+
+        <img
+          src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=300&q=80"
+          alt="Cheesecake">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Berry Cheesecake
+          </h3>
+
+          <p class="menu-item-desc">
+            Creamy cheesecake with berry compote.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹260
+        </div>
+
+      </div>
+
+
+      <div class="menu-item" data-category="drinks">
+
+        <img
+          src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=300&q=80"
+          alt="Lemonade">
+
+        <div class="menu-item-info">
+
+          <h3 class="menu-item-name">
+            Fresh Lemonade
+          </h3>
+
+          <p class="menu-item-desc">
+            Fresh lemon, mint and sparkling water.
+          </p>
+
+        </div>
+
+        <div class="menu-price">
+          ₹160
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     GALLERY
+========================================================= -->
+
+<section class="gallery" id="gallery">
+
+  <div class="container">
+
+    <div class="section-head center reveal">
+
+      <div class="eyebrow">
+        Inside EMBER & BEAN
+      </div>
+
+      <h2 class="section-title">
+        See the <span>vibe.</span>
+      </h2>
+
+      <p class="section-text">
+        Coffee, food and beautiful moments from our café.
+      </p>
+
+    </div>
+
+
+    <div class="gallery-grid">
+
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=85"
+          alt="Cafe interior">
+      </div>
+
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=85"
+          alt="Cafe table">
+      </div>
+
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=800&q=85"
+          alt="Cafe">
+      </div>
+
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1511081692775-05d0f180a065?auto=format&fit=crop&w=1000&q=85"
+          alt="Coffee">
+      </div>
+
+      <div class="gallery-item reveal">
+        <img
+          src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=85"
+          alt="Cafe food">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     REVIEWS
+========================================================= -->
+
+<section class="reviews">
+
+  <div class="container">
+
+    <div class="section-head center reveal">
+
+      <div class="eyebrow">
+        Guest Reviews
+      </div>
+
+      <h2 class="section-title">
+        Loved by our <span>community.</span>
+      </h2>
+
+    </div>
+
+
+    <div class="review-grid">
+
+      <div class="review reveal">
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+        <p>
+          “Beautiful atmosphere, amazing coffee and genuinely friendly staff.
+          One of my favourite places to spend a slow Sunday morning.”
+        </p>
+
+        <div class="reviewer">
+
+          <div class="avatar">
+            A
+          </div>
+
+          <div>
+            <strong>Arjun Mehta</strong><br>
+            <small>Local Guide</small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="review reveal">
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+        <p>
+          “The food was fresh, the coffee was excellent and the interiors
+          are absolutely beautiful.”
+        </p>
+
+        <div class="reviewer">
+
+          <div class="avatar">
+            S
+          </div>
+
+          <div>
+            <strong>Sarah Kapoor</strong><br>
+            <small>Regular Guest</small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="review reveal">
+
+        <div class="stars">
+          ★★★★★
+        </div>
+
+        <p>
+          “Perfect place to work for a few hours. Great Wi-Fi,
+          comfortable seating and excellent coffee.”
+        </p>
+
+        <div class="reviewer">
+
+          <div class="avatar">
+            R
+          </div>
+
+          <div>
+            <strong>Rohan Shah</strong><br>
+            <small>Freelancer</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESERVATION
+========================================================= -->
+
+<section class="reservation" id="reservation">
+
+  <div class="container reservation-grid">
+
+    <div class="reveal">
+
+      <div class="eyebrow">
+        Reservations
+      </div>
+
+      <h2 class="section-title">
+        Your table is <span>waiting.</span>
+      </h2>
+
+      <p class="section-text">
+        Planning a coffee date, business meeting or weekend brunch?
+        Reserve your table and we'll take care of the rest.
+      </p>
+
+    </div>
+
+
+    <form class="booking-form reveal" id="bookingForm">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Your Name</label>
+
+          <input
+            type="text"
+            placeholder="Enter your name"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Phone Number</label>
+
+          <input
+            type="tel"
+            placeholder="+91 XXXXX XXXXX"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Date</label>
+
+          <input
+            type="date"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Time</label>
+
+          <select required>
+
+            <option value="">
+              Select time
+            </option>
+
+            <option>
+              10:00 AM
+            </option>
+
+            <option>
+              12:00 PM
+            </option>
+
+            <option>
+              5:00 PM
+            </option>
+
+            <option>
+              7:00 PM
+            </option>
+
+            <option>
+              9:00 PM
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>Special Request</label>
+
+          <textarea
+            placeholder="Any special request?">
+          </textarea>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width:100%;">
+            Request a Reservation →
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION
+========================================================= -->
+
+<section class="location" id="contact">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div class="eyebrow">
+        Find Us
+      </div>
+
+      <h2 class="section-title">
+        Come say <span>hello.</span>
+      </h2>
+
+    </div>
+
+
+    <div class="location-grid">
+
+      <div class="map-box reveal">
+
+        <a href="#" class="map-button">
+          📍 Get Directions
+        </a>
+
+      </div>
+
+
+      <div class="contact-card reveal">
+
+        <div class="contact-row">
+
+          <div class="contact-icon">
+            📍
+          </div>
+
+          <div>
+
+            <h4>
+              Our Location
+            </h4>
+
+            <p>
+              123 Downtown Avenue,<br>
+              Your City, Maharashtra 422001
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="contact-row">
+
+          <div class="contact-icon">
+            📞
+          </div>
+
+          <div>
+
+            <h4>
+              Call Us
+            </h4>
+
+            <p>
+              +91 98765 43210
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="contact-row">
+
+          <div class="contact-icon">
+            🕐
+          </div>
+
+          <div>
+
+            <h4>
+              Opening Hours
+            </h4>
+
+            <p>
+              Mon–Fri: 8:00 AM – 10:30 PM<br>
+              Sat–Sun: 8:00 AM – 11:00 PM
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <a
+          href="tel:+919876543210"
+          class="btn btn-primary">
+          Call the Café
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section class="faq">
+
+  <div class="container">
+
+    <div class="section-head center reveal">
+
+      <div class="eyebrow">
+        FAQ
+      </div>
+
+      <h2 class="section-title">
+        Frequently asked <span>questions.</span>
+      </h2>
+
+    </div>
+
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          <span>
+            Do I need to reserve a table?
+          </span>
+
+          <span>
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>
+            Reservations aren't required for regular visits,
+            but we recommend booking ahead during weekends.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          <span>
+            Do you offer vegetarian options?
+          </span>
+
+          <span>
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>
+            Yes. Our menu includes a wide range of vegetarian dishes,
+            breakfast options, desserts and beverages.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="faq-item">
+
+        <button class="faq-question">
+
+          <span>
+            Do you offer takeaway?
+          </span>
+
+          <span>
+            +
+          </span>
+
+        </button>
+
+        <div class="faq-answer">
+
+          <p>
+            Yes. Most items from our menu are available for takeaway.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="footer-logo">
+          EMBER<span>&</span>BEAN
+        </div>
+
+        <p class="footer-description">
+          Specialty coffee, fresh food and warm moments.
+          Your neighbourhood café, made with care.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Explore
+        </h4>
+
+        <ul class="footer-links">
+
+          <li>
+            <a href="#about">
+              Our Story
+            </a>
+          </li>
+
+          <li>
+            <a href="#signature">
+              Signature Menu
+            </a>
+          </li>
+
+          <li>
+            <a href="#menu">
+              Full Menu
+            </a>
+          </li>
+
+          <li>
+            <a href="#gallery">
+              Gallery
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Visit
+        </h4>
+
+        <ul class="footer-links">
+
+          <li>
+            123 Downtown Avenue
+          </li>
+
+          <li>
+            Your City, Maharashtra
+          </li>
+
+          <li>
+            +91 98765 43210
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Opening Hours
+        </h4>
+
+        <ul class="footer-links">
+
+          <li>
+            Mon – Fri: 8 AM – 10:30 PM
+          </li>
+
+          <li>
+            Sat – Sun: 8 AM – 11 PM
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 EMBER & BEAN. All rights reserved.
+      </span>
+
+      <span>
+        Designed for memorable coffee moments.
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================================================
+     WHATSAPP
+========================================================= -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/919876543210"
+  target="_blank"
+  aria-label="Chat on WhatsApp">
+  ☎
+</a>
+
+
+<script>
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+  navbar.classList.toggle(
+    "scrolled",
+    window.scrollY > 50
+  );
+
+});
+
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+
+const menuToggle =
+  document.getElementById("menuToggle");
+
+const navLinks =
+  document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+
+  navLinks.classList.toggle("active");
+
+});
+
+document
+  .querySelectorAll(".nav-links a")
+  .forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      navLinks.classList.remove("active");
+
+    });
+
+  });
+
+
+/* =========================================================
+   ⭐ 3D CAFÉ WHEEL
+========================================================= */
+
+const wheelStage =
+  document.getElementById("cafeWheelStage");
+
+const wheel =
+  document.getElementById("cafeWheel");
+
+const centerLabel =
+  document.getElementById("wheelCenterLabel");
+
+const activeTitle =
+  document.getElementById("wheelActiveTitle");
+
+const activeName =
+  document.getElementById("activeDishName");
+
+const activeDescription =
+  document.getElementById("activeDishDescription");
+
+const wheelIndex =
+  document.getElementById("wheelIndex");
+
+
+/*
+   Replace these images with the café owner's
+   real food photographs later.
+*/
+
+const dishes = [
+
+  {
+    title:"Classic Cappuccino",
+    category:"Coffee",
+    price:"₹180",
+    description:
+      "Double espresso with silky steamed milk and beautiful foam.",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Avocado Toast",
+    category:"Breakfast",
+    price:"₹320",
+    description:
+      "Sourdough toast, creamy avocado, herbs and chilli flakes.",
+    image:
+      "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Creamy Pasta",
+    category:"Main Course",
+    price:"₹380",
+    description:
+      "Fresh house pasta finished with a creamy herb sauce.",
+    image:
+      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Berry Cheesecake",
+    category:"Dessert",
+    price:"₹260",
+    description:
+      "Creamy cheesecake served with seasonal berry compote.",
+    image:
+      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Chocolate Tart",
+    category:"Dessert",
+    price:"₹220",
+    description:
+      "Rich dark chocolate tart finished with fresh cream.",
+    image:
+      "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Fresh Lemonade",
+    category:"Beverage",
+    price:"₹160",
+    description:
+      "Fresh lemon, mint and sparkling water.",
+    image:
+      "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Pancake Stack",
+    category:"Breakfast",
+    price:"₹290",
+    description:
+      "Fluffy pancakes, fresh berries and maple syrup.",
+    image:
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=90"
+  },
+
+  {
+    title:"Garden Bowl",
+    category:"Main Course",
+    price:"₹340",
+    description:
+      "Fresh vegetables, grains and our signature dressing.",
+    image:
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=900&q=90"
+  }
+
+];
+
+
+/* ---------------------------------------------------------
+   WHEEL GEOMETRY
+--------------------------------------------------------- */
+
+const CARD_HEIGHT_RATIO = .39;
+const CARD_MAX_WIDTH = .27;
+const CARD_RATIO = 1.15;
+
+const STEP = 42;
+
+const DRUM_RADIUS = 2.2;
+
+const RING_RADIUS = 1.15;
+
+const PERSPECTIVE = 2.7;
+
+const BOW = 1.8;
+
+const EASE = .12;
+
+const WHEEL_UNITS = 800;
+
+const DRAG_UNITS = 430;
+
+const SETTLE_TIME = 140;
+
+
+/* ---------------------------------------------------------
+   STATE
+--------------------------------------------------------- */
+
+let turn = 0;
+
+let targetTurn = 0;
+
+let active = 0;
+
+let cardElements = [];
+
+let dragging = false;
+
+let lastPointerY = 0;
+
+let settleTimer;
+
+
+/* ---------------------------------------------------------
+   BUILD CARDS
+--------------------------------------------------------- */
+
+function buildWheel(){
+
+  wheel.innerHTML = "";
+
+  wheelIndex.innerHTML = "";
+
+  cardElements = [];
+
+  dishes.forEach((dish,index) => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "cafe-wheel-card";
+
+    card.setAttribute(
+      "aria-label",
+      dish.title
+    );
+
+    const inner =
+      document.createElement("div");
+
+    inner.className =
+      "cafe-wheel-card-inner";
+
+
+    const image =
+      document.createElement("img");
+
+    image.src = dish.image;
+
+    image.alt = dish.title;
+
+    image.draggable = false;
+
+
+    const overlay =
+      document.createElement("div");
+
+    overlay.className =
+      "cafe-wheel-overlay";
+
+
+    const content =
+      document.createElement("div");
+
+    content.className =
+      "cafe-wheel-card-content";
+
+
+    content.innerHTML = `
+
+      <small>
+        ${dish.category}
+      </small>
+
+      <h3>
+        ${dish.title}
+      </h3>
+
+      <strong>
+        ${dish.price}
+      </strong>
+
+    `;
+
+
+    inner.appendChild(image);
+
+    inner.appendChild(overlay);
+
+    inner.appendChild(content);
+
+    card.appendChild(inner);
+
+    wheel.appendChild(card);
+
+    cardElements.push({
+      card,
+      inner
+    });
+
+
+    /* INDEX */
+
+    const li =
+      document.createElement("li");
+
+    const button =
+      document.createElement("button");
+
+    button.type = "button";
+
+    button.textContent =
+      dish.title;
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        setTarget(index + 1);
+
+      }
+    );
+
+    li.appendChild(button);
+
+    wheelIndex.appendChild(li);
+
+  });
+
+
+  updateIndex();
+
+  resizeWheel();
+
+}
+
+
+/* ---------------------------------------------------------
+   GEOMETRY
+--------------------------------------------------------- */
+
+let cardWidth = 0;
+
+let cardHeight = 0;
+
+let ringRadius = 0;
+
+let drumRadius = 0;
+
+let bowAmount = 0;
+
+function resizeWheel(){
+
+  const width =
+    wheelStage.clientWidth;
+
+  const height =
+    wheelStage.clientHeight;
+
+
+  cardHeight =
+    height * CARD_HEIGHT_RATIO;
+
+
+  cardWidth =
+    Math.min(
+      cardHeight * CARD_RATIO,
+      width * CARD_MAX_WIDTH
+    );
+
+
+  drumRadius =
+    cardHeight * DRUM_RADIUS;
+
+  ringRadius =
+    cardHeight * RING_RADIUS;
+
+  bowAmount =
+    cardHeight * BOW;
+
+
+  cardElements.forEach(
+    ({card}) => {
+
+      card.style.width =
+        `${cardWidth}px`;
+
+      card.style.height =
+        `${cardHeight}px`;
+
+      card.style.marginLeft =
+        `${-cardWidth / 2}px`;
+
+      card.style.marginTop =
+        `${-cardHeight / 2}px`;
+
+    }
+  );
+
+
+  draw();
+
+}
+
+
+/* ---------------------------------------------------------
+   BOW CURVE
+--------------------------------------------------------- */
+
+function bowAt(degrees){
+
+  const radians =
+    degrees * Math.PI / 180;
+
+  return -bowAmount *
+    (1 - Math.cos(radians));
+
+}
+
+
+/* ---------------------------------------------------------
+   CLAMP
+--------------------------------------------------------- */
+
+function clamp(value,min,max){
+
+  return Math.min(
+    max,
+    Math.max(min,value)
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   PLACE CARD
+--------------------------------------------------------- */
+
+function placeCard(
+  ringDegrees,
+  drumDegrees,
+  m
+){
+
+  const x =
+    m * bowAt(drumDegrees);
+
+
+  const rotateRing =
+    (1-m) * ringDegrees;
+
+
+  const vertical =
+    -(1-m) * ringRadius;
+
+
+  const rotateX =
+    m * drumDegrees;
+
+
+  const translateZ =
+    m * drumRadius;
+
+
+  return `
+    translateX(${x}px)
+    rotateZ(${rotateRing}deg)
+    translateY(${vertical}px)
+    rotateX(${rotateX}deg)
+    translateZ(${translateZ}px)
+  `;
+
+}
+
+
+/* ---------------------------------------------------------
+   DRAW
+--------------------------------------------------------- */
+
+function draw(){
+
+  if(!cardElements.length){
+    return;
+  }
+
+
+  const gap =
+    targetTurn - turn;
+
+
+  if(
+    Math.abs(gap) < .0005
+  ){
+
+    turn =
+      targetTurn;
+
+  }else{
+
+    turn +=
+      gap * EASE;
+
+  }
+
+
+  const m =
+    clamp(turn,0,1);
+
+
+  const position =
+    Math.max(0,turn-1);
+
+
+  wheel.style.transform = `
+    translateZ(${-m * drumRadius}px)
+  `;
+
+
+  cardElements.forEach(
+    ({card,inner},index) => {
+
+      const d =
+        index - position;
+
+
+      const drumDegrees =
+        d * STEP;
+
+
+      const ringDegrees =
+        d * (360 / dishes.length);
+
+
+      card.style.transform =
+        placeCard(
+          ringDegrees,
+          drumDegrees,
+          m
+        );
+
+
+      const distance =
+        Math.abs(d);
+
+
+      card.style.opacity =
+        m > .5 && distance > 1.6
+          ? "0"
+          : "1";
+
+
+      card.style.zIndex =
+        String(
+          Math.round(
+            100 - distance * 3
+          )
+        );
+
+
+      const ringScale =
+        Math.min(
+          1,
+          Math.max(
+            .22,
+            1 / (
+              1 +
+              (dishes.length / 9)
+            )
+          )
+        );
+
+
+      const scale =
+        ringScale +
+        (1-ringScale) * m;
+
+
+      inner.style.transform =
+        `scale(${scale})`;
+
+    }
+  );
+
+
+  centerLabel.style.opacity =
+    String(1-m);
+
+
+  activeTitle.style.opacity =
+    String(m);
+
+
+  const near =
+    clamp(
+      Math.round(position),
+      0,
+      dishes.length-1
+    );
+
+
+  if(near !== active){
+
+    active =
+      near;
+
+    updateActive();
+
+  }
+
+
+  updateIndex();
+
+
+  requestAnimationFrame(draw);
+
+}
+
+
+/* ---------------------------------------------------------
+   TARGET
+--------------------------------------------------------- */
+
+function setTarget(value){
+
+  targetTurn =
+    clamp(
+      value,
+      0,
+      dishes.length
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   ACTIVE CONTENT
+--------------------------------------------------------- */
+
+function updateActive(){
+
+  const dish =
+    dishes[active];
+
+  if(!dish){
+    return;
+  }
+
+  activeName.textContent =
+    dish.title;
+
+  activeDescription.textContent =
+    dish.description;
+
+}
+
+
+/* ---------------------------------------------------------
+   INDEX ACTIVE STATE
+--------------------------------------------------------- */
+
+function updateIndex(){
+
+  const buttons =
+    wheelIndex.querySelectorAll("button");
+
+
+  buttons.forEach(
+    (button,index) => {
+
+      button.classList.toggle(
+        "active",
+        index === active
+      );
+
+    }
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   WHEEL / MOUSE
+--------------------------------------------------------- */
+
+wheelStage.addEventListener(
+  "wheel",
+  event => {
+
+    const next =
+      targetTurn +
+      event.deltaY / WHEEL_UNITS;
+
+
+    if(
+      next > 0 &&
+      next < dishes.length
+    ){
+
+      event.preventDefault();
+
+    }
+
+
+    setTarget(next);
+
+
+    clearTimeout(
+      settleTimer
+    );
+
+
+    settleTimer =
+      setTimeout(
+        () => {
+
+          setTarget(
+            Math.round(
+              targetTurn
+            )
+          );
+
+        },
+        SETTLE_TIME
+      );
+
+  },
+  {
+    passive:false
+  }
+);
+
+
+/* ---------------------------------------------------------
+   DRAG
+--------------------------------------------------------- */
+
+wheelStage.addEventListener(
+  "pointerdown",
+  event => {
+
+    dragging = true;
+
+    lastPointerY =
+      event.clientY;
+
+    wheelStage.setPointerCapture(
+      event.pointerId
+    );
+
+  }
+);
+
+
+wheelStage.addEventListener(
+  "pointermove",
+  event => {
+
+    if(!dragging){
+      return;
+    }
+
+
+    const delta =
+      lastPointerY -
+      event.clientY;
+
+
+    setTarget(
+      targetTurn +
+      delta / DRAG_UNITS
+    );
+
+
+    lastPointerY =
+      event.clientY;
+
+  }
+);
+
+
+function stopDragging(){
+
+  if(!dragging){
+    return;
+  }
+
+  dragging = false;
+
+
+  if(targetTurn > 1){
+
+    setTarget(
+      Math.round(
+        targetTurn
+      )
+    );
+
+  }
+
+}
+
+
+wheelStage.addEventListener(
+  "pointerup",
+  stopDragging
+);
+
+wheelStage.addEventListener(
+  "pointercancel",
+  stopDragging
+);
+
+wheelStage.addEventListener(
+  "pointerleave",
+  event => {
+
+    if(
+      dragging &&
+      event.pointerType === "mouse"
+    ){
+
+      stopDragging();
+
+    }
+
+  }
+);
+
+
+/* ---------------------------------------------------------
+   KEYBOARD
+--------------------------------------------------------- */
+
+wheelStage.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "ArrowDown" ||
+      event.key === "ArrowRight"
+    ){
+
+      setTarget(
+        Math.round(targetTurn)+1
+      );
+
+      event.preventDefault();
+
+    }
+
+
+    if(
+      event.key === "ArrowUp" ||
+      event.key === "ArrowLeft"
+    ){
+
+      setTarget(
+        Math.round(targetTurn)-1
+      );
+
+      event.preventDefault();
+
+    }
+
+  }
+);
+
+
+/* ---------------------------------------------------------
+   RESIZE
+--------------------------------------------------------- */
+
+window.addEventListener(
+  "resize",
+  resizeWheel
+);
+
+
+/* ---------------------------------------------------------
+   INITIALIZE
+--------------------------------------------------------- */
+
+buildWheel();
+
+updateActive();
+
+requestAnimationFrame(draw);
+
+
+/* =========================================================
+   FULL MENU FILTER
+========================================================= */
+
+const menuTabs =
+  document.querySelectorAll(
+    ".menu-tab"
+  );
+
+const menuItems =
+  document.querySelectorAll(
+    ".menu-item"
+  );
+
+
+menuTabs.forEach(
+  tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        menuTabs.forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+        tab.classList.add(
+          "active"
+        );
+
+
+        const category =
+          tab.dataset.category;
+
+
+        menuItems.forEach(
+          item => {
+
+            if(
+              category === "all" ||
+              item.dataset.category === category
+            ){
+
+              item.style.display =
+                "flex";
+
+            }else{
+
+              item.style.display =
+                "none";
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+document
+  .querySelectorAll(".faq-question")
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const item =
+            button.parentElement;
+
+
+          document
+            .querySelectorAll(".faq-item")
+            .forEach(
+              other => {
+
+                if(other !== item){
+
+                  other.classList.remove(
+                    "open"
+                  );
+
+                }
+
+              }
+            );
+
+
+          item.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".reveal"
+  );
+
+
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(
+        entry => {
+
+          if(
+            entry.isIntersecting
+          ){
+
+            entry.target.classList.add(
+              "visible"
+            );
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+      );
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+
+revealElements.forEach(
+  element =>
+    revealObserver.observe(
+      element
+    )
+);
+
+
+/* =========================================================
+   RESERVATION DEMO
+========================================================= */
+
+const bookingForm =
+  document.getElementById(
+    "bookingForm"
+  );
+
+
+bookingForm.addEventListener(
+  "submit",
+  event => {
+
+    event.preventDefault();
+
+
+    alert(
+      "Thank you! Your reservation request has been received."
+    );
+
+
+    bookingForm.reset();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
