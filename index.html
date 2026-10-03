@@ -77,13 +77,14 @@
 
 html{
     scroll-behavior:smooth;
+    overflow-x:clip;
 }
 
 body{
     font-family:"DM Sans",sans-serif;
     background:var(--cream);
     color:var(--dark);
-    overflow-x:hidden;
+    overflow-x:clip;
 }
 
 img{
@@ -1664,6 +1665,7 @@ footer{
 }
 
 .coffee-scroll-sticky {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     width: 100%;
@@ -1674,6 +1676,9 @@ footer{
     align-items: center;
     justify-content: center;
     background: #140d12;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .coffee-scroll-viewport {
@@ -1822,22 +1827,10 @@ footer{
     }
 }
 
-/* Reduced motion preference support */
+/* Reduced motion preference support - softens transitions without destroying sticky layout */
 @media (prefers-reduced-motion: reduce) {
-    .coffee-scroll-section {
-        height: auto !important;
-        min-height: 70vh !important;
-        padding: 60px 0 !important;
-    }
-
-    .coffee-scroll-sticky {
-        position: relative !important;
-        height: 70vh !important;
-    }
-
     .coffee-hero-content {
-        opacity: 1 !important;
-        transform: translateY(-50%) !important;
+        transition: none !important;
     }
 }
 
@@ -1899,6 +1892,7 @@ Visit Us
     id="coffee-scroll-video"
     class="coffee-scroll-video"
     src="coffee-scroll.mp4"
+    poster="coffee-poster.jpg"
     muted
     playsinline
     webkit-playsinline="true"
@@ -2988,17 +2982,12 @@ document
 
     if (!section || !video) return;
 
-    // Respect user's prefers-reduced-motion
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (motionQuery.matches) {
-        video.pause();
-        video.addEventListener("loadedmetadata", () => {
-            if (video.duration) {
-                video.currentTime = 0;
-            }
-        }, { once: true });
-        return;
-    }
+    // Mobile-first inline video initialization
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
 
     // Guarantee video remains paused (no autoplay)
     video.pause();
@@ -3012,6 +3001,7 @@ document
     let targetTime = 0;
     let interpolatedTime = 0;
     let pendingSeekTime = null;
+    let lastSeekTime = 0;
 
     // Cached layout geometry to eliminate layout thrashing
     let sectionTop = 0;
@@ -3055,14 +3045,14 @@ document
         onScroll();
     }, { passive: true });
 
-    // Smooth seek mechanism with queueing and boundary enforcement
+    // Smooth seek mechanism with mobile throttling and boundary enforcement
     function performSeek(time) {
-        if (!isVideoReady || !video.duration || isNaN(video.duration)) return;
+        if (!video.duration || isNaN(video.duration)) return;
 
         let safeTime = time;
-        if (targetProgress === 0 && Math.abs(time) < 0.03) {
+        if (targetProgress <= 0.001) {
             safeTime = 0;
-        } else if (targetProgress === 1 && Math.abs(time - video.duration) < 0.03) {
+        } else if (targetProgress >= 0.999) {
             safeTime = video.duration;
         } else {
             safeTime = Math.max(0, Math.min(video.duration, time));
@@ -3073,13 +3063,17 @@ document
             return;
         }
 
+        const now = performance.now();
         const delta = Math.abs(video.currentTime - safeTime);
-        if (delta > 0.008 || safeTime === 0 || safeTime === video.duration) {
+
+        // Responsive seeking with mobile hardware protection
+        if ((delta > 0.012 && now - lastSeekTime > 30) || safeTime === 0 || safeTime === video.duration) {
             try {
+                lastSeekTime = now;
                 video.currentTime = safeTime;
                 pendingSeekTime = null;
             } catch (e) {
-                // Ignore transient seek collision
+                pendingSeekTime = safeTime;
             }
         }
     }
@@ -3193,13 +3187,49 @@ document
         updateHeroText(currentProgress);
     }
 
+    // Mobile decoder unlock / priming on first user touch or scroll
+    let isPrimed = false;
+    function primeMobileVideo() {
+        if (isPrimed) return;
+        isPrimed = true;
+
+        video.muted = true;
+        video.defaultMuted = true;
+
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                video.pause();
+                onVideoReady();
+            }).catch(() => {
+                onVideoReady();
+            });
+        } else {
+            video.pause();
+            onVideoReady();
+        }
+    }
+
+    // Mobile touch & interaction listeners
+    window.addEventListener("touchstart", primeMobileVideo, { passive: true, once: true });
+    window.addEventListener("touchmove", primeMobileVideo, { passive: true, once: true });
+    window.addEventListener("scroll", primeMobileVideo, { passive: true, once: true });
+    window.addEventListener("click", primeMobileVideo, { passive: true, once: true });
+
+    // Video lifecycle event listeners
     video.addEventListener("loadedmetadata", onVideoReady);
     video.addEventListener("canplay", onVideoReady);
     video.addEventListener("loadeddata", onVideoReady);
+    video.addEventListener("durationchange", onVideoReady);
 
     if (video.readyState >= 1) {
         onVideoReady();
     }
+
+    // Initiate buffer load immediately
+    try {
+        video.load();
+    } catch (e) {}
 
     // Tab visibility handling: pause/resume cleanly
     document.addEventListener("visibilitychange", () => {
