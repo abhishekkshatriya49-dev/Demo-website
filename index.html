@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+/* Safe fetch shim for preview iframe environment */
+(function() {
+    try {
+        var _originalFetch = window.fetch ? window.fetch.bind(window) : null;
+        var _currentFetch = _originalFetch;
+        Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+                return _currentFetch;
+            },
+            set: function(fn) {
+                _currentFetch = fn;
+            }
+        });
+    } catch (e) {
+        try {
+            var _protoFetch = Window.prototype.fetch;
+            var _currentProtoFetch = _protoFetch;
+            Object.defineProperty(Window.prototype, 'fetch', {
+                configurable: true,
+                enumerable: true,
+                get: function() {
+                    return _currentProtoFetch;
+                },
+                set: function(fn) {
+                    _currentProtoFetch = fn;
+                }
+            });
+        } catch (err) {}
+    }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Velvet Bean Café — Coffee. Conversations. Moments.</title>
 
 <meta name="description" content="Velvet Bean Café — premium coffee, handcrafted desserts and memorable moments.">
+<meta property="og:title" content="Velvet Bean Café — Coffee. Conversations. Moments.">
+<meta property="og:description" content="Velvet Bean Café — premium coffee, handcrafted desserts and memorable moments.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1616,6 +1652,195 @@ footer{
 
 }
 
+/* =========================================================
+   CINEMATIC COFFEE SCROLL SECTION
+========================================================= */
+
+.coffee-scroll-section {
+    position: relative;
+    height: 350vh;
+    background: #140d12;
+    z-index: 2;
+}
+
+.coffee-scroll-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #140d12;
+}
+
+.coffee-scroll-viewport {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #140d12;
+}
+
+.coffee-scroll-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
+}
+
+/* Subtle atmospheric transitions between sections */
+.coffee-scroll-fade-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: linear-gradient(to bottom, rgba(20, 13, 18, 0.85) 0%, rgba(20, 13, 18, 0.4) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.coffee-scroll-fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(20, 13, 18, 0.4) 35%, rgba(247, 243, 237, 0.85) 85%, var(--cream) 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Hero Content Overlay on Effect */
+.coffee-hero-backdrop {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 28% 50%, rgba(20, 13, 18, 0.82) 0%, rgba(20, 13, 18, 0.5) 50%, rgba(20, 13, 18, 0.25) 75%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+.coffee-hero-content {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    transform: translateY(-50%);
+    z-index: 4;
+    max-width: 1280px;
+    margin: 0 auto;
+    pointer-events: auto;
+    will-change: opacity, transform;
+}
+
+.coffee-hero-content h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 6.5vw, 92px);
+    line-height: 1.08;
+    color: #ffffff;
+    max-width: 850px;
+    margin: 22px 0;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.coffee-hero-content h1 em {
+    color: #d4a86a;
+    font-style: normal;
+}
+
+.coffee-hero-content .hero-description {
+    max-width: 560px;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.8;
+    font-size: 17px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.coffee-hero-content .hero-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 900px) {
+    .coffee-scroll-section {
+        height: 300vh;
+    }
+
+    .coffee-hero-content {
+        top: 52%;
+    }
+
+    .coffee-hero-content h1 {
+        font-size: clamp(38px, 8vw, 56px);
+    }
+
+    .coffee-hero-backdrop {
+        background: rgba(20, 13, 18, 0.62);
+    }
+}
+
+@media (max-width: 600px) {
+    .coffee-scroll-section {
+        height: 280vh;
+    }
+
+    .coffee-scroll-video {
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    .coffee-hero-content {
+        top: 50%;
+    }
+
+    .coffee-hero-content h1 {
+        font-size: 34px;
+        margin: 16px 0;
+    }
+
+    .coffee-hero-content .hero-description {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .coffee-hero-content .hero-actions {
+        margin-top: 22px;
+    }
+}
+
+/* Reduced motion preference support */
+@media (prefers-reduced-motion: reduce) {
+    .coffee-scroll-section {
+        height: auto !important;
+        min-height: 70vh !important;
+        padding: 60px 0 !important;
+    }
+
+    .coffee-scroll-sticky {
+        position: relative !important;
+        height: 70vh !important;
+    }
+
+    .coffee-hero-content {
+        opacity: 1 !important;
+        transform: translateY(-50%) !important;
+    }
+}
+
 </style>
 </head>
 
@@ -1659,16 +1884,32 @@ Visit Us
 
 
 <!-- =====================================================
-     HERO
+     CINEMATIC SCROLL VIDEO HERO
 ===================================================== -->
 
-<section class="hero" id="home">
+<section class="coffee-scroll-section" id="home" aria-label="Velvet Bean Café - Fresh Handcrafted Coffee">
 
-<div class="animated-bg"></div>
+<div class="coffee-scroll-fade-top"></div>
 
-<div class="hero-overlay"></div>
+<div class="coffee-scroll-sticky">
 
-<div class="hero-content">
+<div class="coffee-scroll-viewport">
+
+<video
+    id="coffee-scroll-video"
+    class="coffee-scroll-video"
+    src="coffee-scroll.mp4"
+    muted
+    playsinline
+    webkit-playsinline="true"
+    preload="auto"
+    tabindex="-1"
+    aria-hidden="true"
+></video>
+
+<div class="coffee-hero-backdrop"></div>
+
+<div class="coffee-hero-content container">
 
 <div class="eyebrow">
 <span></span>
@@ -1700,14 +1941,11 @@ Find Our Café
 
 </div>
 
-<div class="hero-image">
-
-<img
-src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=90"
-alt="Fresh coffee at Velvet Bean Café"
->
+</div>
 
 </div>
+
+<div class="coffee-scroll-fade-bottom"></div>
 
 </section>
 
@@ -2738,6 +2976,244 @@ document
         });
 
     });
+
+
+/* =====================================================
+   CINEMATIC SCROLL-CONTROLLED COFFEE VIDEO (HIGH PERFORMANCE ENGINE)
+===================================================== */
+
+(function initCoffeeScrollAnimation() {
+    const section = document.querySelector(".coffee-scroll-section");
+    const video = document.getElementById("coffee-scroll-video");
+
+    if (!section || !video) return;
+
+    // Respect user's prefers-reduced-motion
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionQuery.matches) {
+        video.pause();
+        video.addEventListener("loadedmetadata", () => {
+            if (video.duration) {
+                video.currentTime = 0;
+            }
+        }, { once: true });
+        return;
+    }
+
+    // Guarantee video remains paused (no autoplay)
+    video.pause();
+    video.addEventListener("play", () => {
+        video.pause();
+    });
+
+    let isVideoReady = false;
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let targetTime = 0;
+    let interpolatedTime = 0;
+    let pendingSeekTime = null;
+
+    // Cached layout geometry to eliminate layout thrashing
+    let sectionTop = 0;
+    let scrollRange = 1;
+
+    function measureLayout() {
+        const rect = section.getBoundingClientRect();
+        sectionTop = rect.top + window.scrollY;
+        scrollRange = Math.max(1, section.offsetHeight - window.innerHeight);
+    }
+
+    // Normalized progress calculation (0 to 1) with zero layout thrashing
+    function getNormalizedProgress() {
+        const relativeScroll = window.scrollY - sectionTop;
+        if (relativeScroll <= 0) return 0;
+        if (relativeScroll >= scrollRange) return 1;
+        return relativeScroll / scrollRange;
+    }
+
+    // Lightweight scroll handler (no layout reads, passive)
+    function onScroll() {
+        targetProgress = getNormalizedProgress();
+        if (isVideoReady && video.duration > 0) {
+            if (targetProgress <= 0.0005) {
+                targetTime = 0;
+            } else if (targetProgress >= 0.9995) {
+                targetTime = video.duration;
+            } else {
+                targetTime = targetProgress * video.duration;
+            }
+        }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", () => {
+        measureLayout();
+        onScroll();
+    }, { passive: true });
+    window.addEventListener("orientationchange", () => {
+        measureLayout();
+        onScroll();
+    }, { passive: true });
+
+    // Smooth seek mechanism with queueing and boundary enforcement
+    function performSeek(time) {
+        if (!isVideoReady || !video.duration || isNaN(video.duration)) return;
+
+        let safeTime = time;
+        if (targetProgress === 0 && Math.abs(time) < 0.03) {
+            safeTime = 0;
+        } else if (targetProgress === 1 && Math.abs(time - video.duration) < 0.03) {
+            safeTime = video.duration;
+        } else {
+            safeTime = Math.max(0, Math.min(video.duration, time));
+        }
+
+        if (video.seeking) {
+            pendingSeekTime = safeTime;
+            return;
+        }
+
+        const delta = Math.abs(video.currentTime - safeTime);
+        if (delta > 0.008 || safeTime === 0 || safeTime === video.duration) {
+            try {
+                video.currentTime = safeTime;
+                pendingSeekTime = null;
+            } catch (e) {
+                // Ignore transient seek collision
+            }
+        }
+    }
+
+    video.addEventListener("seeked", () => {
+        if (pendingSeekTime !== null) {
+            const next = pendingSeekTime;
+            pendingSeekTime = null;
+            performSeek(next);
+        }
+    });
+
+    // Zero-thrashing hero text state manager
+    const heroContent = document.querySelector(".coffee-hero-content");
+    const heroBackdrop = document.querySelector(".coffee-hero-backdrop");
+    let lastHeroState = -1; // 0 = fully visible, 1 = fading, 2 = hidden
+    let lastHeroOpacity = -1;
+    let lastHeroLift = -1;
+
+    function updateHeroText(progress) {
+        if (!heroContent) return;
+
+        if (progress <= 0.10) {
+            if (lastHeroState !== 0) {
+                heroContent.style.opacity = "1";
+                heroContent.style.transform = "translate3d(0, -50%, 0)";
+                heroContent.style.pointerEvents = "auto";
+                if (heroBackdrop) heroBackdrop.style.opacity = "1";
+                lastHeroState = 0;
+                lastHeroOpacity = 1;
+                lastHeroLift = 0;
+            }
+        } else if (progress >= 0.36) {
+            if (lastHeroState !== 2) {
+                heroContent.style.opacity = "0";
+                heroContent.style.transform = "translate3d(0, calc(-50% - 35px), 0)";
+                heroContent.style.pointerEvents = "none";
+                if (heroBackdrop) heroBackdrop.style.opacity = "0";
+                lastHeroState = 2;
+                lastHeroOpacity = 0;
+                lastHeroLift = 35;
+            }
+        } else {
+            lastHeroState = 1;
+            const t = (progress - 0.10) / 0.26;
+            const opacity = Math.round((1 - t) * 100) / 100;
+            const lift = Math.round(t * 35);
+
+            if (opacity !== lastHeroOpacity) {
+                heroContent.style.opacity = opacity;
+                if (heroBackdrop) heroBackdrop.style.opacity = opacity;
+                lastHeroOpacity = opacity;
+            }
+
+            if (lift !== lastHeroLift) {
+                heroContent.style.transform = `translate3d(0, calc(-50% - ${lift}px), 0)`;
+                lastHeroLift = lift;
+            }
+
+            heroContent.style.pointerEvents = t > 0.8 ? "none" : "auto";
+        }
+    }
+
+    // Responsive smoothness factor (0.16 = ultra-responsive, zero stutter)
+    const LERP_FACTOR = 0.16;
+
+    function animationLoop() {
+        if (isVideoReady && video.duration > 0) {
+            const timeDiff = targetTime - interpolatedTime;
+
+            if (Math.abs(timeDiff) > 0.001) {
+                interpolatedTime += timeDiff * LERP_FACTOR;
+            } else {
+                interpolatedTime = targetTime;
+            }
+
+            // Snap cleanly to exact boundary frames
+            if (targetProgress === 0 && Math.abs(interpolatedTime) < 0.02) {
+                interpolatedTime = 0;
+            } else if (targetProgress === 1 && Math.abs(interpolatedTime - video.duration) < 0.02) {
+                interpolatedTime = video.duration;
+            }
+
+            // Interpolate progress for text overlay
+            const progDiff = targetProgress - currentProgress;
+            if (Math.abs(progDiff) > 0.0001) {
+                currentProgress += progDiff * LERP_FACTOR;
+            } else {
+                currentProgress = targetProgress;
+            }
+
+            performSeek(interpolatedTime);
+            updateHeroText(currentProgress);
+        }
+
+        requestAnimationFrame(animationLoop);
+    }
+
+    function onVideoReady() {
+        if (isVideoReady) return;
+        isVideoReady = true;
+
+        video.pause();
+        measureLayout();
+        onScroll();
+
+        currentProgress = targetProgress;
+        interpolatedTime = targetTime;
+
+        performSeek(interpolatedTime);
+        updateHeroText(currentProgress);
+    }
+
+    video.addEventListener("loadedmetadata", onVideoReady);
+    video.addEventListener("canplay", onVideoReady);
+    video.addEventListener("loadeddata", onVideoReady);
+
+    if (video.readyState >= 1) {
+        onVideoReady();
+    }
+
+    // Tab visibility handling: pause/resume cleanly
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+            measureLayout();
+            onScroll();
+        }
+    });
+
+    // Initial setup
+    measureLayout();
+    onScroll();
+    requestAnimationFrame(animationLoop);
+})();
 
 </script>
 
